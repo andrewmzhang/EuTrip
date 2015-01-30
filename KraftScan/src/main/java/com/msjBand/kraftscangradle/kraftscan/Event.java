@@ -18,13 +18,19 @@ public class Event {
     private String mNotes;
     private String mConcern;
     private TimeZone mTimeZone;
+    private GregorianCalendar mEndDate;
 
-    public Event(TimeZone timeZone,int year, int month, int date, int hourOfDay, int minute, int second ) {
+    public Event(TimeZone timeZone,int year, int month, int date, int hourOfDay, int minute, int second) {
 
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
         mDate.set(year, month, date, hourOfDay, minute, second);
 
+    }
+
+    public void setmEndDate(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
+        mEndDate = new GregorianCalendar(timeZone, Locale.US);
+        mEndDate.set(year, month, date, hourOfDay, minute,second);
     }
 
     public String getDateString() {
