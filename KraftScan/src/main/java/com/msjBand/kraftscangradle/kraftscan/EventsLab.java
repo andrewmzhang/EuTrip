@@ -26,18 +26,18 @@ public class EventsLab {
         e.setOccurred(false);
         mEvents.add(e);
 
-        // Flight Group 2283
+        // Arrival @ 5am
         e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
-        e.setTitle("Flight 2283");
-        e.setNotes("");
+        e.setTitle("Airport SFO");
+        e.setNotes("Arrive at SFO American Airlines Domestic Departures Terminal 2");
         e.setOccurred(false);
         mEvents.add(e);
 
-        // Flight Group 2411
-        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
-        e.setTitle("Flight 2411");
-        e.setOccurred(false);
-        mEvents.add(e);
+        // Departure of Flight 2283
+        e =  new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 8, 35, 0);
+        e.setTitle("Flight 2283 Departure");
+
+
 
 
 

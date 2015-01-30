@@ -10,6 +10,7 @@ import java.util.*;
 public class Event {
 
     private UUID mId;
+    private boolean flight2411 = false;
     private String mTitle;
     private GregorianCalendar mDate;
     private boolean mOccurred;
@@ -35,6 +36,10 @@ public class Event {
 
     public String getDateString() {
         return mDateFormat.format("EEEE, MMM d, yyyy", mDate).toString();
+    }
+
+    public void setFlight2411(boolean bool) {
+        flight2411 = bool;
     }
 
     public String getTimeZone() {
