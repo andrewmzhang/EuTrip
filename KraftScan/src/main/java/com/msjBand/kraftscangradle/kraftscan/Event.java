@@ -1,11 +1,12 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
-import android.location.Address;
-import android.location.Location;
-import android.text.format.DateFormat;
-
-import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.UUID;
 
 public class Event {
 
@@ -18,21 +19,31 @@ public class Event {
     private String mNotes;
     private String mConcern;
     private TimeZone mTimeZone;
+    private SimpleDateFormat fmt;
 
-    public Event(TimeZone timeZone,int year, int month, int date, int hourOfDay, int minute, int second ) {
+    public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
 
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
-        mDate.set(year, month, date, hourOfDay, minute, second);
+        mDate.set(year, month - 1, date, hourOfDay, minute, second);
+        fmt = new SimpleDateFormat(("EEEE, MMM d, yyyy, hh:mm:ss a zzz"));
 
     }
 
-    public String getDateString() {
-        return mDateFormat.format("EEEE, MMM d, yyyy", mDate).toString();
+
+    public String getLocal() {
+        return fmt.format(mDate.getTime());
     }
+
+    public String getGMT() {
+        TimeZone obj = TimeZone.getTimeZone("GMT");
+        fmt.setTimeZone(obj);
+        return fmt.format(mDate.getTime());
+    }
+
 
     public String getTimeZone() {
-        return  mTimeZone.toString();
+        return mTimeZone.toString();
     }
 
     public String getAddress() {
