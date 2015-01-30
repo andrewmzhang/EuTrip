@@ -7,6 +7,7 @@ import android.provider.CalendarContract;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
+
 public class EventsLab {
 
     private static EventsLab sEventsLab;
@@ -19,10 +20,24 @@ public class EventsLab {
         mAppContext = appContext;
         mEvents = new ArrayList<Event>();
 
+        // Mandatory Meeting
         Event e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 1, 29, 15, 30, 0);
         e.setTitle("Mandatory Meeting");
         e.setOccurred(false);
         mEvents.add(e);
+
+        // Arrival @ 5am
+        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
+        e.setTitle("Airport SFO");
+        e.setNotes("Arrive at SFO American Airlines Domestic Departures Terminal 2");
+        e.setOccurred(false);
+        mEvents.add(e);
+
+        // Departure of Flight 2283
+        e =  new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 8, 35, 0);
+        e.setTitle("Flight 2283 Departure");
+
+
 
 
 
