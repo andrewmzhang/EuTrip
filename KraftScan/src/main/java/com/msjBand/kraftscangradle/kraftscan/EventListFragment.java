@@ -2,6 +2,7 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -55,6 +56,7 @@ public class EventListFragment extends ListFragment {
 
             TextView titleTextView =
                     (TextView) convertView.findViewById(R.id.event_Title);
+            titleTextView.setPaintFlags(titleTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             titleTextView.setText(e.getTitle());
 
             return convertView;
