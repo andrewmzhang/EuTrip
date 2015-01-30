@@ -54,6 +54,8 @@ public class EventsLab {
 
     }
 
+    public ArrayList<Event> getEvents() {return mEvents;}
+
 
 
 

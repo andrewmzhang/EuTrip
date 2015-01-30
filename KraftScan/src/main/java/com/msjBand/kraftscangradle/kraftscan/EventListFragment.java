@@ -1,17 +1,20 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 import android.app.Activity;
-import android.app.ListFragment;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EventListFragment extends ListFragment {
@@ -25,7 +28,40 @@ public class EventListFragment extends ListFragment {
 
         getActivity().setTitle(R.string.event_title);
 
-        mEvents =
+        mEvents = EventsLab.get(getActivity()).getEvents();
+
+        EventAdapter adapter = new EventAdapter(mEvents);
+        setListAdapter(adapter);
 
     }
+
+
+    private class EventAdapter extends ArrayAdapter<Event> {
+
+        public EventAdapter(List<Event> Events) {
+            super(getActivity(), 0, Events);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater()
+                        .inflate(R.layout.list_item_event, null);
+
+            }
+
+            Event e = getItem(position);
+
+            TextView titleTextView =
+                    (TextView) convertView.findViewById(R.id.event_Title);
+            titleTextView.setText(e.getTitle());
+
+            return convertView;
+
+
+        }
+    }
+
+
 }
