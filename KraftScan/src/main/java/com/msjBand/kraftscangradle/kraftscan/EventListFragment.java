@@ -24,6 +24,14 @@ public class EventListFragment extends ListFragment {
     private static final String TAG = "EventListFragment";
 
     @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Event e = ((EventAdapter) getListAdapter()).getItem(position);
+
+
+
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
