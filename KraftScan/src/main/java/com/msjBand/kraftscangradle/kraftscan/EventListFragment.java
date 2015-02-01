@@ -2,6 +2,7 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,9 @@ public class EventListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Event e = ((EventAdapter) getListAdapter()).getItem(position);
 
-
+        Intent i = new Intent(getActivity(), EventActivity.class);
+        i.putExtra(EventFragment.EVENT_ID, position);
+        startActivity(i);
 
     }
 

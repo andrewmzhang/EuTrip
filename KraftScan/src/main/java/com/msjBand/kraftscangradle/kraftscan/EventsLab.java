@@ -38,8 +38,11 @@ public class EventsLab {
         e.setTitle("Flight 2283 Departure");
 
 
+    }
 
+    public Event getEvent(int position) {
 
+        return mEvents.get(position);
 
     }
 
