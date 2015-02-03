@@ -8,5 +8,9 @@
     <string name="event_title">Trip Events</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="title_event_fragment">Title</string>
+    <string name="time_label">Time:</string>
+    <string name="ETA_label">ETA:</string>
+    <string name="date_label">Date:</string>
+    <string name="notes_label">Description:</string>
 
 </resources>

@@ -18,7 +18,7 @@ public class EventFragment extends Fragment {
             "com.msjBand.kraftscangradle.kraftscan";
 
 
-    public static EventFragment newInstanse(int id) {
+    public static EventFragment newInstance(int id) {
 
         Bundle args = new Bundle();
         args.putInt(EVENT_ID, id);

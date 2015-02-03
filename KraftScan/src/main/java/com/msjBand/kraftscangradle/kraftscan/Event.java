@@ -41,6 +41,12 @@ public class Event {
         return fmt.format(mDate.getTime());
     }
 
+    public String getETA() {
+
+
+
+    }
+
 
     public String getTimeZone() {
         return mTimeZone.toString();

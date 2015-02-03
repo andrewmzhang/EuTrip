@@ -12,13 +12,64 @@
             android:layout_height="wrap_content"
             android:id="@+id/event_fragment_title"
             style="?android:listSeparatorTextViewStyle"
-            android:textSize="20dp"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:paddingTop="10dp"
             />
+
     <TextView
+            android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/ETA_label"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+    <TextView
+            android:id="@+id/event_fragment_ETA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="23dp"
+
 
             />
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:gravity="right"
+            >
+
+        <TextView
+                android:text="@string/time_label"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:text="@string/date_label"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:id="@+id/event_fragment_timezone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="?android:listSeparatorTextViewStyle"
+                
+                />
+
+    </LinearLayout>
 
 
 

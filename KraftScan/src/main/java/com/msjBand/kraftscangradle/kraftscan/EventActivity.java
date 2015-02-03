@@ -18,9 +18,6 @@ public class EventActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
         int id = getIntent().getIntExtra(EventFragment.EVENT_ID,0);
-
-
-
-        return new EventFragment.newInstanse(id);
+        return EventFragment.newInstance(id);
     }
 }
