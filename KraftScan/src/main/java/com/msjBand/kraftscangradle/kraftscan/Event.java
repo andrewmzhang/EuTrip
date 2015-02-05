@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+
 public class Event {
 
     private UUID mId;
@@ -20,14 +21,15 @@ public class Event {
     private SimpleDateFormat fmt;
 
     public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
-
         mTimeZone = timeZone;
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
         mDate.set(year, month - 1, date, hourOfDay, minute, second);
-        fmt = new SimpleDateFormat(("EEEE, MMM d, yyyy, hh:mm:ss a zzz"));
-
+        fmt = new SimpleDateFormat(("" +
+                "hh:mm:ss a EEEE, MMM d, yyyy"));
     }
+
+
 
 
     public String getLocal() {
@@ -70,14 +72,8 @@ public class Event {
 
 
     public String getTimeZone() {
-
-        if (mTimeZone.getDisplayName().equals("Pacific Standard Time")){
-
-            return "PST";
-
-        }
-
-        return mTimeZone.getDisplayName();
+        fmt = new SimpleDateFormat("zzz");
+        return fmt.format(mDate.getTime());
     }
 
     public String getAddress() {

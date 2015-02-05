@@ -17,9 +17,13 @@ public class EventFragment extends Fragment {
     private Event mEvent;
     private TextView mTitleText;
     private TextView mETAText;
+    private TextView mTimeZoneText;
+    private TextView mTimeText;
+    private TextView mDateText;
+
+
     private Handler mHandler;
     private Runnable mUpdate;
-    private TextView mTimeZoneText;
     private String mTimeString;
 
     public static final String EVENT_ID =
@@ -73,6 +77,9 @@ public class EventFragment extends Fragment {
         mTimeZoneText = (TextView) v.findViewById(R.id.event_fragment_timezone);
         mTimeString = mEvent.getTimeZone();
         mTimeZoneText.setText( "(" + mTimeString + ")");
+
+        mTimeText = (TextView) v.findViewById(R.id.time_text);
+        mTimeText.setText(mEvent.getLocal());
 
 
 
