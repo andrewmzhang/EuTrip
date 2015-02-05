@@ -19,6 +19,8 @@ public class EventFragment extends Fragment {
     private TextView mETAText;
     private Handler mHandler;
     private Runnable mUpdate;
+    private TextView mTimeZoneText;
+    private String mTimeString;
 
     public static final String EVENT_ID =
             "com.msjBand.kraftscangradle.kraftscan";
@@ -66,8 +68,11 @@ public class EventFragment extends Fragment {
                 mHandler.postDelayed(this, 1000);
             }
         };
-
         mHandler.postDelayed(mUpdate, 0);
+
+        mTimeZoneText = (TextView) v.findViewById(R.id.event_fragment_timezone);
+        mTimeString = mEvent.getTimeZone();
+        mTimeZoneText.setText( "(" + mTimeString + ")");
 
 
 

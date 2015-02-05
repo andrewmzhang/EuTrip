@@ -34,7 +34,7 @@ public class EventsLab {
         mEvents.add(e);
 
         // Departure of Flight 2283
-        e =  new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 8, 35, 0);
+        e =  new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 2, 5, 8, 35, 0);
         e.setTitle("Flight 2283 Departure");
 
 

@@ -21,6 +21,7 @@ public class Event {
 
     public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
 
+        mTimeZone = timeZone;
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
         mDate.set(year, month - 1, date, hourOfDay, minute, second);
@@ -60,7 +61,8 @@ public class Event {
         if (day != 0) {dayText = day + "d ";}
         if (hours != 0) {hourText = hours + "h ";}
         if (minutes != 0) {minText = minutes + "m ";}
-        if (seconds != 0) {secText = seconds + "s";}
+        secText = seconds + "s";
+        if (seconds < 10) {secText = "0" + secText;}
 
         return (dayText + hourText + minText + secText);
 
@@ -68,7 +70,14 @@ public class Event {
 
 
     public String getTimeZone() {
-        return mTimeZone.toString();
+
+        if (mTimeZone.getDisplayName().equals("Pacific Standard Time")){
+
+            return "PST";
+
+        }
+
+        return mTimeZone.getDisplayName();
     }
 
     public String getAddress() {
