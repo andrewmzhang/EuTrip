@@ -2,6 +2,7 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import org.w3c.dom.Text;
 
+import java.util.logging.LogRecord;
+
 public class EventFragment extends Fragment {
 
-    Event mEvent;
-    TextView mTitleText;
-    TextView mETAText;
+    private Event mEvent;
+    private TextView mTitleText;
+    private TextView mETAText;
+    private Handler mHandler;
+    private Runnable mUpdate;
 
     public static final String EVENT_ID =
             "com.msjBand.kraftscangradle.kraftscan";
@@ -37,8 +42,8 @@ public class EventFragment extends Fragment {
 
         int id = (int) getArguments().getInt(EVENT_ID);
 
-
         mEvent = EventsLab.get(getActivity()).getEvent(id);
+
 
     }
 
@@ -50,8 +55,21 @@ public class EventFragment extends Fragment {
         mTitleText = (TextView) v.findViewById(R.id.event_fragment_title);
         mTitleText.setText(mEvent.getTitle());
 
+
         mETAText = (TextView) v.findViewById(R.id.event_fragment_ETA);
-        mETAText.setText(mEvent.getETA());
+
+        mHandler = new Handler();
+        mUpdate = new Runnable() {
+            @Override
+            public void run() {
+                mETAText.setText(mEvent.getETA());
+                mHandler.postDelayed(this, 1000);
+            }
+        };
+
+        mHandler.postDelayed(mUpdate, 0);
+
+
 
         return v;
 

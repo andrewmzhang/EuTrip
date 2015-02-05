@@ -44,9 +44,25 @@ public class Event {
         long end = mDate.getTimeInMillis();
         long start = now.getTimeInMillis();
         long interval = end - start;
-        int time = interval / ()
 
+        if (interval < 0)
+            return "Passed";
 
+        String dayText = "";
+        String hourText = "";
+        String minText = "";
+        String secText = "";
+
+        int day = (int) (interval / (1000 * 60 * 60 * 24));
+        int hours = (int) (interval / (1000 * 60 * 60)) - (day * 24);
+        int minutes = (int) (interval/ (1000 * 60)) - (day * 24 * 60) - (hours * 60);
+        int seconds = (int) (interval/ (1000)) - (day * 24 * 60 *60) - (hours * 60 *60) - (minutes * 60);
+        if (day != 0) {dayText = day + "d ";}
+        if (hours != 0) {hourText = hours + "h ";}
+        if (minutes != 0) {minText = minutes + "m ";}
+        if (seconds != 0) {secText = seconds + "s";}
+
+        return (dayText + hourText + minText + secText);
 
     }
 
