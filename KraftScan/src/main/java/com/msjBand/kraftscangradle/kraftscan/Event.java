@@ -3,10 +3,8 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Event {
 
@@ -42,6 +40,11 @@ public class Event {
     }
 
     public String getETA() {
+        Calendar now = Calendar.getInstance();
+        long end = mDate.getTimeInMillis();
+        long start = now.getTimeInMillis();
+        long interval = end - start;
+        int time = interval / ()
 
 
 

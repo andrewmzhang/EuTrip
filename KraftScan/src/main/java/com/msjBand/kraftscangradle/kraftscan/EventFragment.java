@@ -13,6 +13,7 @@ public class EventFragment extends Fragment {
 
     Event mEvent;
     TextView mTitleText;
+    TextView mETAText;
 
     public static final String EVENT_ID =
             "com.msjBand.kraftscangradle.kraftscan";
@@ -48,6 +49,9 @@ public class EventFragment extends Fragment {
 
         mTitleText = (TextView) v.findViewById(R.id.event_fragment_title);
         mTitleText.setText(mEvent.getTitle());
+
+        mETAText = (TextView) v.findViewById(R.id.event_fragment_ETA);
+        mETAText.setText(mEvent.getETA());
 
         return v;
 
