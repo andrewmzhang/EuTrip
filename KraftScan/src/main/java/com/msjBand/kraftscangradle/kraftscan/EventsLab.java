@@ -2,7 +2,6 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 
 import android.content.Context;
-import android.provider.CalendarContract;
 
 import java.util.ArrayList;
 import java.util.TimeZone;
@@ -36,20 +35,13 @@ public class EventsLab {
         // Departure of Flight 2283
         e =  new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 8, 35, 0);
         e.setTitle("Flight 2283 Departure");
-        e.setNotes("San Fransisco Airport to Dallas Forth Worth International Airport. Remember to transfer to flight 048 at 7:35 local time. \nFlight 2283 Roster:\n"
+        e.setNotes("\tSan Fransisco Airport to Dallas Forth Worth International Airport. Remember to transfer to flight 048 at 7:35 local time. \n\nFlight 2283 Roster:\n"
         + "Monica Kraft\nWenhan Fang\nSathvik Vivek\nYu-Cheng Chou\nYu-Ting Chou\nJemmy Zhou\nRaymong Yin\nJianXiang Liu\nNikhil Pathania\nAllison Xu\nCharles Xu\nSharleen Zhou");
         e.setOccurred(false);
         mEvents.add(e);
 
 
     }
-
-    public Event getEvent(int position) {
-
-        return mEvents.get(position);
-
-    }
-
 
     public static EventsLab get(Context c) {
         if (sEventsLab == null) {
@@ -58,6 +50,12 @@ public class EventsLab {
         }
 
         return sEventsLab;
+
+    }
+
+    public Event getEvent(int position) {
+
+        return mEvents.get(position);
 
     }
 

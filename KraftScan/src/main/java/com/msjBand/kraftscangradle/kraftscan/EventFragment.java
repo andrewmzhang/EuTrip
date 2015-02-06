@@ -4,16 +4,16 @@ package com.msjBand.kraftscangradle.kraftscan;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import org.w3c.dom.Text;
-
-import java.util.logging.LogRecord;
 
 public class EventFragment extends Fragment {
 
+    public static final String EVENT_ID =
+            "com.msjBand.kraftscangradle.kraftscan";
     private Event mEvent;
     private TextView mTitleText;
     private TextView mETAText;
@@ -22,15 +22,10 @@ public class EventFragment extends Fragment {
     private TextView mDateText;
     private TextView mTimeLabel;
     private TextView mDateLabel;
-
-
+    private TextView mDescription;
     private Handler mHandler;
     private Runnable mUpdate;
     private String mTimeString;
-
-    public static final String EVENT_ID =
-            "com.msjBand.kraftscangradle.kraftscan";
-
 
     public static EventFragment newInstance(int id) {
 
@@ -48,7 +43,7 @@ public class EventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int id = (int) getArguments().getInt(EVENT_ID);
+        int id = getArguments().getInt(EVENT_ID);
 
         mEvent = EventsLab.get(getActivity()).getEvent(id);
 
@@ -84,14 +79,14 @@ public class EventFragment extends Fragment {
         mTimeZoneText.setText( "(" + mTimeString + ")");
 
         mTimeText = (TextView) v.findViewById(R.id.time_text);
-        mTimeText.setWidth(mTimeLabel.getWidth());
         mTimeText.setText("   " + mEvent.getLocalTime());
 
         mDateText = (TextView) v.findViewById(R.id.date_text);
-        mDateText.setWidth(mDateLabel.getWidth());
         mDateText.setText(mEvent.getLocalDate());
 
-
+        mDescription = (TextView) v.findViewById(R.id.event_fragment_description);
+        mDescription.setText(mEvent.getNotes());
+        mDescription.setMovementMethod(new ScrollingMovementMethod());
 
 
         return v;
