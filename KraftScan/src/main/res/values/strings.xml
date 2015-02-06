@@ -12,5 +12,6 @@
     <string name="ETA_label">ETA:</string>
     <string name="date_label">Date:</string>
     <string name="notes_label">Description:</string>
+    <string name="PST_Id">America/Los_Angeles</string>
 
 </resources>

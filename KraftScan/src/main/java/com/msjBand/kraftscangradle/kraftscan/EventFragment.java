@@ -20,6 +20,8 @@ public class EventFragment extends Fragment {
     private TextView mTimeZoneText;
     private TextView mTimeText;
     private TextView mDateText;
+    private TextView mTimeLabel;
+    private TextView mDateLabel;
 
 
     private Handler mHandler;
@@ -74,12 +76,21 @@ public class EventFragment extends Fragment {
         };
         mHandler.postDelayed(mUpdate, 0);
 
+        mTimeLabel = (TextView) v.findViewById(R.id.event_fragment_time_label);
+        mDateLabel = (TextView) v.findViewById(R.id.event_fragment_date_label);
+
         mTimeZoneText = (TextView) v.findViewById(R.id.event_fragment_timezone);
         mTimeString = mEvent.getTimeZone();
         mTimeZoneText.setText( "(" + mTimeString + ")");
 
         mTimeText = (TextView) v.findViewById(R.id.time_text);
-        mTimeText.setText(mEvent.getLocal());
+        mTimeText.setWidth(mTimeLabel.getWidth());
+        mTimeText.setText("   " + mEvent.getLocalTime());
+
+        mDateText = (TextView) v.findViewById(R.id.date_text);
+        mDateText.setWidth(mDateLabel.getWidth());
+        mDateText.setText(mEvent.getLocalDate());
+
 
 
 

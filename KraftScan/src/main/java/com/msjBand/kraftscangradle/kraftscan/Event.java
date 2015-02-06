@@ -1,6 +1,7 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,15 +26,24 @@ public class Event {
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
         mDate.set(year, month - 1, date, hourOfDay, minute, second);
-        fmt = new SimpleDateFormat(("" +
+        fmt = new SimpleDateFormat((
                 "hh:mm:ss a EEEE, MMM d, yyyy"));
     }
 
 
 
 
-    public String getLocal() {
+    public String getLocalDate() {
+        fmt.setTimeZone(mTimeZone);
+        fmt = new SimpleDateFormat("EEE MMM d");
         return fmt.format(mDate.getTime());
+    }
+
+    public String getLocalTime() {
+        fmt.setTimeZone(mTimeZone);
+        fmt = new SimpleDateFormat("hh:mm:ss a");
+        return fmt.format(mDate.getTime());
+
     }
 
     public String getGMT() {
@@ -43,14 +53,19 @@ public class Event {
     }
 
     public String getETA() {
+
+        if(isOccurred())
+            return "Passed";
+
         Calendar now = Calendar.getInstance();
         long end = mDate.getTimeInMillis();
         long start = now.getTimeInMillis();
         long interval = end - start;
 
-        if (interval < 0)
+        if (interval < 0) {
+            setOccurred(true);
             return "Passed";
-
+        }
         String dayText = "";
         String hourText = "";
         String minText = "";
