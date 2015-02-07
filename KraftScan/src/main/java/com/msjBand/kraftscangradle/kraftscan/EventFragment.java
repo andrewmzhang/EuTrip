@@ -26,6 +26,7 @@ public class EventFragment extends Fragment {
     private Handler mHandler;
     private Runnable mUpdate;
     private String mTimeString;
+    private TextView mMyFlight;
 
     public static EventFragment newInstance(int id) {
 
@@ -65,7 +66,8 @@ public class EventFragment extends Fragment {
         mUpdate = new Runnable() {
             @Override
             public void run() {
-                mETAText.setText(mEvent.getETA());
+                String text = mEvent.getETA();
+                mETAText.setText(text);
                 mHandler.postDelayed(this, 1000);
             }
         };
@@ -84,6 +86,23 @@ public class EventFragment extends Fragment {
         mDateText = (TextView) v.findViewById(R.id.date_text);
         mDateText.setText(mEvent.getLocalDate());
 
+        mMyFlight = (TextView) v.findViewById(R.id.event_fragment_flight);
+        if (mEvent.getIsFlight()) {
+            EventsLab lab = EventsLab.get(getActivity());
+
+            if (lab.getFlightOne() == -1) { // flight status unknown, ask for search
+                mMyFlight.setText(R.string.flight_status_unsure);
+            }
+            else if ( ((lab.getFlightOne() == 1) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 0) && (!mEvent.getIsFlightOne())) ) {  // if person is on flight one, and we are displaying fligh one
+                mMyFlight.setText(R.string.flight_status_confirmed);
+            }
+            else if ( ((lab.getFlightOne() == 0) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 1) && (!mEvent.getIsFlightOne())) ) {
+                mMyFlight.setText(R.string.not_your_flight);
+            }
+
+        } else {
+            mMyFlight.setVisibility(View.GONE);
+        }
         mDescription = (TextView) v.findViewById(R.id.event_fragment_description);
         mDescription.setText(mEvent.getNotes());
         mDescription.setMovementMethod(new ScrollingMovementMethod());

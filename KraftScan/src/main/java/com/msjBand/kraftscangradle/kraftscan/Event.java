@@ -20,8 +20,12 @@ public class Event {
     private String mConcern;
     private TimeZone mTimeZone;
     private SimpleDateFormat fmt;
+    private boolean misFlightOne;
+    private boolean isFlight;
 
     public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
+        isFlight = false;
+        misFlightOne = false;
         mTimeZone = timeZone;
         mId = UUID.randomUUID();
         mDate = new GregorianCalendar(timeZone, Locale.US);
@@ -31,8 +35,21 @@ public class Event {
     }
 
 
+    public void setIsFlight(boolean value){
+        isFlight = value;
+    }
+    public boolean getIsFlight(){
+        return isFlight;
+    }
 
+    public boolean getIsFlightOne(){
+        return misFlightOne;
 
+    }
+    public void setIsFlightOne(boolean value){
+            misFlightOne = value;
+
+    }
     public String getLocalDate() {
         fmt.setTimeZone(mTimeZone);
         fmt = new SimpleDateFormat("EEE MMM d");
