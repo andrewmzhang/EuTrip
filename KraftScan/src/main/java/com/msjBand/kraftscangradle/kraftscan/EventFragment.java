@@ -1,6 +1,7 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventFragment extends Fragment {
 
@@ -92,9 +94,19 @@ public class EventFragment extends Fragment {
 
             if (lab.getFlightOne() == -1) { // flight status unknown, ask for search
                 mMyFlight.setText(R.string.flight_status_unsure);
+                mMyFlight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity().getBaseContext(), "Hello",
+                                Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
             }
             else if ( ((lab.getFlightOne() == 1) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 0) && (!mEvent.getIsFlightOne())) ) {  // if person is on flight one, and we are displaying fligh one
                 mMyFlight.setText(R.string.flight_status_confirmed);
+                mMyFlight.setBackgroundColor(Color.parseColor("#FF00FF06"));
             }
             else if ( ((lab.getFlightOne() == 0) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 1) && (!mEvent.getIsFlightOne())) ) {
                 mMyFlight.setText(R.string.not_your_flight);
