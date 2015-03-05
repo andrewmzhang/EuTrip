@@ -115,6 +115,14 @@ public class EventFragment extends Fragment {
         } else {
             mMyFlight.setVisibility(View.GONE);
         }
+
+        mMyFlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
         mDescription = (TextView) v.findViewById(R.id.event_fragment_description);
         mDescription.setText(mEvent.getNotes());
         mDescription.setMovementMethod(new ScrollingMovementMethod());

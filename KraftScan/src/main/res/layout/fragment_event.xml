@@ -127,9 +127,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/event_fragment_flight"
+            android:clickable="true"
             android:background="#ff48b1ff"
             android:textColor="@color/background_material_light" android:paddingTop="5dp" android:paddingBottom="7dp"
-            android:focusable="true"/>
+            android:autoText="false"/>
 
     <ScrollView
             android:layout_width="match_parent"
