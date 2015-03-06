@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,10 +121,6 @@ public class EventFragment extends Fragment {
                 
             }
         });
-
-        mDescription = (TextView) v.findViewById(R.id.event_fragment_description);
-        mDescription.setText(mEvent.getNotes());
-        mDescription.setMovementMethod(new ScrollingMovementMethod());
 
 
         return v;

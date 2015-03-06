@@ -2,18 +2,70 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class Flight2283ListFragment extends Fragment {
 
-    private ArrayList<String> mPeople;
     private static final String TAG = "Flight2283ListFragment";
+    private ArrayList<String> mPeople;
+    private ArrayAdapter<String> adapter;
+    private EditText mSearchBar;
+    private ListView mListView;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.student_list_searchable, container, false);
+        mPeople = new ArrayList<String>();
+        mPeople = populatePeople(mPeople);
+
+
+        mSearchBar = (EditText) v.findViewById(R.id.student_search_bar);
+        mSearchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mListView = (ListView) v.findViewById(R.id.student_list);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mPeople);
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = adapter.getItem(position);
+                EventsLab.get(getActivity()).setStudentName(name);
+                Log.d(TAG, "Set name to" + name + " Status: " + EventsLab.get(getActivity()).getFlightOne());
+            }
+        });
+
+        return v;
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,17 +74,7 @@ public class Flight2283ListFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-        mPeople = populatePeople(mPeople);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mPeople);
-        setListAdapter(adapter);
-
-
-    }
 
 
 

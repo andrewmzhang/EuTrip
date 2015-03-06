@@ -18,7 +18,7 @@
             />
 
     <TextView
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="3dp"
@@ -132,22 +132,6 @@
             android:textColor="@color/background_material_light" android:paddingTop="5dp" android:paddingBottom="7dp"
             android:autoText="false"/>
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            android:fillViewport="true"
-            android:layout_weight="1"
-            >
-        <TextView
-                android:id="@+id/event_fragment_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                />
-
-
-    </ScrollView>
 
 
 </LinearLayout>
