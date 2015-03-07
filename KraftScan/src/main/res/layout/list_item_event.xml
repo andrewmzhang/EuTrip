@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-                android:padding="2dp"
-                android:gravity="center">
+                android:padding="10dp"
+                android:gravity="left">
+
+    <ImageView android:layout_width="60dp"
+               android:layout_height="60dp"
+               android:id="@+id/image_view"
+               android:adjustViewBounds="true"
+               />
+
+
     <TextView
             android:gravity="center|center_vertical"
             android:paddingTop="20dp"
@@ -12,7 +20,9 @@
             android:id="@+id/event_Title"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/clear_plane"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
 </LinearLayout>

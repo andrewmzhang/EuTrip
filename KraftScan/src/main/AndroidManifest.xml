@@ -19,6 +19,13 @@
             android:name=".EventActivity"
             android:label="@string/title_activity_event" >
         </activity>
+
+        <activity android:name=".StudentListActivity"
+                  android:label="StudentListActivity"
+                  android:icon="@drawable/ic_launcher"
+                  android:configChanges="keyboardHidden|orientation"
+                android:windowSoftInputMode="stateHidden">
+        </activity>
     </application>
 
 </manifest>

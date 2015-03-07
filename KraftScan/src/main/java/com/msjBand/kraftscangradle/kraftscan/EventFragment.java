@@ -1,6 +1,7 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,8 @@ public class EventFragment extends Fragment {
 
     public static final String EVENT_ID =
             "com.msjBand.kraftscangradle.kraftscan";
+    public static final String EVENT_FLIGHT_TYPE =
+            "com.msjBand.kraftscangradle.flighttype";
     private Event mEvent;
     private TextView mTitleText;
     private TextView mETAText;
@@ -88,6 +91,15 @@ public class EventFragment extends Fragment {
         mDateText.setText(mEvent.getLocalDate());
 
         mMyFlight = (TextView) v.findViewById(R.id.event_fragment_flight);
+        updateTextView();
+
+
+
+        return v;
+
+    }
+
+    private void updateTextView() {
         if (mEvent.getIsFlight()) {
             EventsLab lab = EventsLab.get(getActivity());
 
@@ -96,34 +108,31 @@ public class EventFragment extends Fragment {
                 mMyFlight.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity().getBaseContext(), "Hello",
-                                Toast.LENGTH_SHORT).show();
-
-
+                        Intent i = new Intent(getActivity(), StudentListActivity.class);
+                        i.putExtra(EventFragment.EVENT_FLIGHT_TYPE, mEvent.getIsFlightOne());
+                        startActivity(i);
                     }
                 });
             }
             else if ( ((lab.getFlightOne() == 1) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 0) && (!mEvent.getIsFlightOne())) ) {  // if person is on flight one, and we are displaying fligh one
                 mMyFlight.setText(R.string.flight_status_confirmed);
-                mMyFlight.setBackgroundColor(Color.parseColor("#FF00FF06"));
+                mMyFlight.setBackgroundColor(Color.parseColor("#1EA71E"));
             }
             else if ( ((lab.getFlightOne() == 0) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 1) && (!mEvent.getIsFlightOne())) ) {
                 mMyFlight.setText(R.string.not_your_flight);
+                mMyFlight.setBackgroundColor(Color.parseColor("#ffb41f27"));
             }
 
         } else {
             mMyFlight.setVisibility(View.GONE);
         }
 
-        mMyFlight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+    }
 
-
-        return v;
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMyFlight.setOnClickListener(null);
+        updateTextView();
     }
 }

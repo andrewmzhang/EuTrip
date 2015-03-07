@@ -14,8 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Flight2283ListFragment extends Fragment {
+public class FlightListFragment extends Fragment {
 
     private static final String TAG = "Flight2283ListFragment";
     private ArrayList<String> mPeople;
@@ -60,6 +61,7 @@ public class Flight2283ListFragment extends Fragment {
                 String name = adapter.getItem(position);
                 EventsLab.get(getActivity()).setStudentName(name);
                 Log.d(TAG, "Set name to" + name + " Status: " + EventsLab.get(getActivity()).getFlightOne());
+                getActivity().finish();
             }
         });
 
@@ -129,7 +131,7 @@ public class Flight2283ListFragment extends Fragment {
         arrayList.add("Rahul Chatwani");
         arrayList.add("Nathon Ma");
         arrayList.add("Amanda Wang");
-        arrayList.add("TCJ Cheng");
+        arrayList.add("Tiancheng (TCJ) Cheng");
         arrayList.add("Kevin Zhu");
         arrayList.add("Kevin Yu");
         arrayList.add("Albert Stanley");
@@ -168,6 +170,8 @@ public class Flight2283ListFragment extends Fragment {
         arrayList.add("Derek Xia");
         arrayList.add("Akshita Gandra");
         arrayList.add("Teresa Hsu");
+        Collections.sort(arrayList, String.CASE_INSENSITIVE_ORDER);
+
 
         return arrayList;
 

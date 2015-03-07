@@ -60,4 +60,12 @@ dependencies {
 }
 
 
+repositories{
+    maven {
+        url 'http://dl.bintray.com/amulyakhare/maven'
+    }
+}
 
+dependencies {
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+}
