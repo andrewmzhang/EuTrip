@@ -1,11 +1,9 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 
 public class Event {
@@ -24,6 +22,19 @@ public class Event {
     private boolean isFlight;
     private boolean isDepart;
     private int drawableId;
+
+    public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
+        isFlight = false;
+        misFlightOne = false;
+        mTimeZone = timeZone;
+        mId = UUID.randomUUID();
+        mOccurred = false;
+        drawableId = android.R.drawable.star_big_on;
+        mDate = new GregorianCalendar(timeZone, Locale.US);
+        mDate.set(year, month - 1, date, hourOfDay, minute, second);
+        fmt = new SimpleDateFormat((
+                "h:mm:ss a EEEE, MMM d, yyyy"));
+    }
 
     public int getDrawableId() {
         return drawableId;
@@ -45,25 +56,12 @@ public class Event {
         this.isDepart = isDepart;
     }
 
-    public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
-        isFlight = false;
-        misFlightOne = false;
-        mTimeZone = timeZone;
-        mId = UUID.randomUUID();
-        mOccurred = false;
-        drawableId = android.R.drawable.star_big_on;
-        mDate = new GregorianCalendar(timeZone, Locale.US);
-        mDate.set(year, month - 1, date, hourOfDay, minute, second);
-        fmt = new SimpleDateFormat((
-                "hh:mm:ss a EEEE, MMM d, yyyy"));
+    public boolean getIsFlight() {
+        return isFlight;
     }
-
 
     public void setIsFlight(boolean value){
         isFlight = value;
-    }
-    public boolean getIsFlight(){
-        return isFlight;
     }
 
     public boolean getIsFlightOne(){
@@ -82,7 +80,7 @@ public class Event {
 
     public String getLocalTime() {
         fmt.setTimeZone(mTimeZone);
-        fmt = new SimpleDateFormat("hh:mm:ss a");
+        fmt = new SimpleDateFormat("h:mm a");
         return fmt.format(mDate.getTime());
 
     }

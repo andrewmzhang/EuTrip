@@ -43,7 +43,6 @@ public class EventsLab {
         Event e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
         e.setTitle("Airport SFO");
         e.setNotes("Arrive at SFO American Airlines Domestic Departures Terminal 2");
-        e.setOccurred(false);
         e.setDrawableId(R.drawable.airport);
         mEvents.add(e);
 
@@ -60,7 +59,6 @@ public class EventsLab {
                         "\n\n\tRaymond Mendonca\n\tJessica Mao\n\tDelaine Rogers\n\tAnnie Xu\n\tLyann Choi\n\tRushalee Nirodi\n\tMyra Awan\n\tDanice Long\n\tDiana Gia Tran"
 
         );
-        e.setOccurred(false);
         e.setIsFlight(false);
         e.setIsFlight(true);
         e.setDepart(true);
@@ -79,7 +77,6 @@ public class EventsLab {
                 "\n\n\tJanet Baker\n\tSean Li\n\tDylan Lim\n\tJelena Lee\n\tAlison Chen\n\tShagun Srivastava\n\tClaire Yung\n\tJoshua Zeng\n\tAnthony Herget\n\tRamona Gonzalez\n\tMarcos Jung\n\tRoselyn Jung" +
                 "\n\n\tJean Jea\n\tEmily Xu\n\tAngela Yang\n\tMallika Chatterjee\n\tTanushri Sundar\n\tKevin Zhang\n\tIrene Yin\n\tVivasvan Vykunta\n\tZachary Kekoa\n\tAlexia Kekoa\n\tHerkea Jea" +
                 "\n\n\tSamuel Chou\n\tAneri Parikh\n\tSeona Patel\n\tKenneth Leung\n\tAlex Yin\n\tRohan Nair\n\tShiva Ramani\n\tNicole Hsu\n\tDerek Xia\n\tAkshita Gandra\n\tTeresa Hsu");
-        e.setOccurred(false);
         e.setIsFlightOne(true);
         e.setIsFlight(true);
         e.setDepart(true);
@@ -91,7 +88,6 @@ public class EventsLab {
         e = new Event(TimeZone.getTimeZone("America/Chicago"), 2015, 3, 30, 14, 05, 0);
         e.setTitle("Flight 2283 Arrival");
         e.setNotes("Flight Duration: 3h 30min \n\n\tTouchdown at Dallas Forth Worth Airport. According to Google reviews, this place has really fast internet speeds...\n\n\tDon't forget to transfer flights in 1 hour (15:05)");
-        e.setOccurred(false);
         e.setIsFlight(true);
         e.setDepart(false);
         e.setIsFlightOne(true);
@@ -103,7 +99,6 @@ public class EventsLab {
         e.setTitle("Flight 2411 Arrival");
         e.setNotes("Flight Duration: 4h 22min \n\n\tTouchdown at Chicago O'Hare Airport. According to Google reviews, this airport is notorious for delaying flights, and rates a 3.6/5... \n\n\t Don't forget" +
                 " to transfer flights in 1 hour (15:10)");
-        e.setOccurred(false);
         e.setIsFlight(true);
         e.setIsFlightOne(false);
         e.setDepart(false);
@@ -126,7 +121,6 @@ public class EventsLab {
         e.setIsFlight(true);
         e.setIsFlightOne(true);
         e.setDepart(true);
-        e.setOccurred(false);
         e.setDrawableId(R.drawable.flight_transfer);
         mEvents.add(e);
 
@@ -134,7 +128,7 @@ public class EventsLab {
         e = new Event((TimeZone.getTimeZone("America/Chicago")), 2015, 3, 30, 15, 20, 0);
         e.setTitle("Flight 42 Transfer");
         e.setNotes("Chicago O'Hare to Aeroports de Paris. " +
-                "\n\nFlight 42 Roster:\n"  +
+                "\n\nFlight 42 Roster:\n" +
                 "\n\tMonica Kraft\n\tWenhan Fang\n\tSathvik Vivek\n\tYu-Cheng Chou\n\tYu-Ting Chou\n\tJemmy Zhou\n\tRaymong Yin\n\tJianXiang Liu\n\tNikhil Pathania\n\tAllison Xu\n\tCharles Xu\n\tSharleen Zhou" +
                 "\n\n\tChuck Goodman\n\tAnne Riley\n\tRoy Ho\n\tKai Goodman\n\tBrandon Chen\n\tStanley Zhang\n\tTiernan Barrie\n\tMichelle Dalarossa\n\tRushil Chakrabarty\n\tHelen Chang" +
                 "\n\n\tSandra Kaye\n\tAllison Chan\n\tApril Huang\n\tAlan Liu\n\tAkhil Reddy\n\tHetav Gore\n\tNishir Shelat\n\tWilliam Ho\n\tGraciela Friend\n\tSamutratankul Mujarin" +
@@ -146,18 +140,62 @@ public class EventsLab {
         e.setIsFlight(true);
         e.setIsFlightOne(false);
         e.setDepart(true);
-        e.setOccurred(false);
         e.setDrawableId(R.drawable.flight_transfer);
         mEvents.add(e);
 
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 30, 6, 45, 0);
+        // Flight 42 Arrival
+        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 6, 45, 0);
         e.setTitle("Flight 42 Arrival");
         e.setNotes("Flight Duration: 8h 35min" +
                 "\n\n\t Touchdown at Aeroports de Paris. Welcome to France!");
-        e.setIsFlight(false);
-        e.setOccurred(false);
+        e.setIsFlight(true);
+        e.setIsFlightOne(false);
         e.setDrawableId(R.drawable.plane_landing);
         mEvents.add(e);
+
+        // Flight 48 Arrival
+        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 7, 35, 0);
+        e.setTitle("Flight 48 Arrival");
+        e.setNotes("Flight Duration: 9h 35min" +
+                "\n\n\t Touchdown at Aeroports de Paris. Welcome to France");
+        e.setIsFlight(true);
+        e.setIsFlightOne(true);
+        e.setDrawableId(R.drawable.plane_landing);
+        mEvents.add(e);
+
+        //First Event !!! Needs a drawable ID, make it morning sun
+        e = new Event((TimeZone.getTimeZone("Europe/Parios")), 2015, 3, 31, 8, 0, 0);
+        e.setTitle("Coach/Walking Tour");
+        e.setNotes("\tOn your arrival in Paris after clearing the immigration checkpoint, you will be met in the arrivals area " +
+                "by your tour assistant and taken on a guided coach and walking tour of Paris to see its iconic sites and landmarks " +
+                "including the Eiffel Tower, the Arch de Triomphe, Notre Dame Cathedral, and the Lourve. \n\nLunch at Leisure!");
+        e.setIsFlight(false);
+        mEvents.add(e);
+
+        //Curise on the river seine @ 3pm, use mid day icon
+        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 15, 0, 0);
+        e.setTitle("River Seine Cruise");
+        e.setNotes("\tAfter lunch, enjoy a guided cruise on the river seine. Draw attention to the monuments, history and " +
+                "architecture along the left and right banks of the river.");
+        mEvents.add(e);
+
+        // Travel back to the hotel
+        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 16, 0, 0);
+        e.setTitle("Return to Hotel");
+        e.setNotes("\tTravel by coach to your hotel to check in and freshen up.");
+        mEvents.add(e);
+
+        // Return to the Hotel, needs icon, use twilight
+        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 18, 0, 0);
+        e.setTitle("Info Meeting");
+        e.setNotes("\tYour tour assistant will present an orientation meeting for you, where you will receive your information " +
+                "and itinerary book, and learn all about your week in Paris and Maastricht. You will also have time to explore " +
+                "the vicinity of your hotel to find the nearest general stores and ATM machines.");
+        e.setIsFlight(false);
+        mEvents.add(e);
+
+        // Dinner
+
 
 
 
