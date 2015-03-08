@@ -22,12 +22,36 @@ public class Event {
     private SimpleDateFormat fmt;
     private boolean misFlightOne;
     private boolean isFlight;
+    private boolean isDepart;
+    private int drawableId;
+
+    public int getDrawableId() {
+        return drawableId;
+    }
+
+    public void setDrawableId(int drawableId) {
+        this.drawableId = drawableId;
+    }
+
+    public boolean determineIsOccured() {
+        return false;
+    }
+
+    public boolean isDepart() {
+        return isDepart;
+    }
+
+    public void setDepart(boolean isDepart) {
+        this.isDepart = isDepart;
+    }
 
     public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
         isFlight = false;
         misFlightOne = false;
         mTimeZone = timeZone;
         mId = UUID.randomUUID();
+        mOccurred = false;
+        drawableId = android.R.drawable.star_big_on;
         mDate = new GregorianCalendar(timeZone, Locale.US);
         mDate.set(year, month - 1, date, hourOfDay, minute, second);
         fmt = new SimpleDateFormat((
