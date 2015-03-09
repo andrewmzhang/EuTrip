@@ -3,6 +3,7 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.content.Context;
 
+import javax.xml.parsers.FactoryConfigurationError;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -16,6 +17,7 @@ public class EventsLab {
     private static EventsLab sEventsLab;
     private String studentName;
     private Context mAppContext;
+    private final static String sParisZone= "Europe/Paris";
 
     private ArrayList<Event> mEvents;
     private String mName = "Search Flight Roster";
@@ -144,7 +146,7 @@ public class EventsLab {
         mEvents.add(e);
 
         // Flight 42 Arrival
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 6, 45, 0);
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 6, 45, 0);
         e.setTitle("Flight 42 Arrival");
         e.setNotes("Flight Duration: 8h 35min" +
                 "\n\n\t Touchdown at Aeroports de Paris. Welcome to France!");
@@ -154,7 +156,7 @@ public class EventsLab {
         mEvents.add(e);
 
         // Flight 48 Arrival
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 7, 35, 0);
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 7, 35, 0);
         e.setTitle("Flight 48 Arrival");
         e.setNotes("Flight Duration: 9h 35min" +
                 "\n\n\t Touchdown at Aeroports de Paris. Welcome to France");
@@ -173,20 +175,20 @@ public class EventsLab {
         mEvents.add(e);
 
         //Curise on the river seine @ 3pm, use mid day icon
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 15, 0, 0);
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 15, 0, 0);
         e.setTitle("River Seine Cruise");
         e.setNotes("\tAfter lunch, enjoy a guided cruise on the river seine. Draw attention to the monuments, history and " +
                 "architecture along the left and right banks of the river.");
         mEvents.add(e);
 
         // Travel back to the hotel
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 16, 0, 0);
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 16, 0, 0);
         e.setTitle("Return to Hotel");
         e.setNotes("\tTravel by coach to your hotel to check in and freshen up.");
         mEvents.add(e);
 
         // Return to the Hotel, needs icon, use twilight
-        e = new Event((TimeZone.getTimeZone("Europe/Paris")), 2015, 3, 31, 18, 0, 0);
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 18, 0, 0);
         e.setTitle("Info Meeting");
         e.setNotes("\tYour tour assistant will present an orientation meeting for you, where you will receive your information " +
                 "and itinerary book, and learn all about your week in Paris and Maastricht. You will also have time to explore " +
@@ -195,8 +197,176 @@ public class EventsLab {
         mEvents.add(e);
 
         // Dinner
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 19, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("Dinner will be served in your hotel restaurant in Paris.");
+        e.setIsFlight(false);
+        mEvents.add(e);
+        
+        // Concert by Pinewood High School Chorale
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 3, 31, 20, 0, 0);
+        e.setTitle("Attend Chorale");
+        e.setNotes("\tAttend a performance by the Pinewood High School Chorale in central Paris. \n\n\t" +
+                "Overnight at Novotel Paris Est, Paris");
+        mEvents.add(e);
 
 
+        // DAY TWO -------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Breakfast, use plate symbol
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 1, 8, 0, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("Breakfast is served in your hotel.");
+        mEvents.add(e);
+
+        // Versailles
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 1, 9, 0, 0);
+        e.setTitle("Versailles");
+        e.setNotes("\tDepart for Versailles and take an audio guided tour around The Palace of Versailles built by the 'Sun King', Louis XIV. You will have the chance " +
+                "to visit the most famous places in the Palace including the hall of mirrors, the grand apartments of the King and Queen and the formal gardens. \n\n Lunch at leisure!");
+        mEvents.add(e);
+
+        // Free Time
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 1, 13, 0, 0);
+        e.setTitle("Free Time");
+        e.setNotes("\t This afternoon has been left free for independent sightseeing and shopping in Paris. Your tour assistant will be on hand to suggest plenty " +
+                "of things to you that you might like to see or do.");
+        mEvents.add(e);
+
+        // Dinner
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 1, 18, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("\t An early dinner will be served in a restaurant in central Paris.");
+        mEvents.add(e);
+
+        // Performance
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 1, 20, 0, 0);
+        e.setTitle("Performance");
+        e.setNotes("\t There is a performance at Notre Dame or Basilica de Sacre Coeur in Paris for the Full Orchestra, Wind Symphony, and Brass Choir" +
+                " \n\nOvernight at Novotel Paris Est, Paris");
+        mEvents.add(e);
+
+        // Day Thre ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //Breakfast
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 2, 8, 0, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("\t Breakfast is served in your hotel.");
+        mEvents.add(e);
+
+        // Lourve
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 2, 10, 0, 0);
+        e.setTitle("Lourve");
+        e.setNotes("\t This morning visit the Lourve, Paris' most famous museum as well as one of the world's largest museums as well as a historic monument." +
+                " The Lourve is home to one of the most famous paintings in the world, Leonardo da Vinci's Mona Lisa.\n\nLunch at leisure");
+        mEvents.add(e);
+
+        // marching band performance
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 2, 15, 0, 0);
+        e.setTitle("Parade");
+        e.setNotes("\t This afternoon performance for the marching band in the famous Luxembourg Gardens followed by an outdoor concert in the band shell.");
+        mEvents.add(e);
+
+        // Dinner
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 2, 19, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("\t Dinner will be served in a restaurant in central Paris");
+        mEvents.add(e);
+
+        // Free Time
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 2, 20, 30, 0);
+        e.setTitle("Free Time");
+        e.setNotes("\t Evening free to explore Bastille Square or the Latin Quarter" +
+                "\n\n\"Time to go on an Adventure!!\" - Kai Goodman, after 2nd period, Spanish I, 2012" +
+                "\n\nOvernight at Novotel Paris Est, Paris");
+        mEvents.add(e);
+
+        // day Four ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Breakfast
+        e = new Event((TimeZone.getTimeZone(sParisZone)),2015, 4, 3, 7, 0, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("\t Breakfast is served in your hotel");
+        mEvents.add(e);
+
+        // Depart to Maastricht
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 8, 0, 0);
+        e.setTitle("Maastrich");
+        e.setNotes("\t Depart by coach to Maastricht.");
+        mEvents.add(e);
+
+        // Stop of in Reims
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 9, 30, 0);
+        e.setTitle("Reims Stop");
+        e.setNotes("\t En route stop off in Reism in France to have a look in the Notre-Dame Cathedral of Reims where the Kings of France were crowned. Time also for coffee and snack break.");
+        mEvents.add(e);
+
+        // Depart from Reims
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 11, 0, 0);
+        e.setTitle("Depart from Reims");
+        e.setNotes("\t Depart from Reims");
+        mEvents.add(e);
+
+        // Arrive in Bastogne
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 13, 0, 0);
+        e.setTitle("Arrive in Bastogne");
+        e.setNotes("\t Arrive in Bastogne in Belgium, the location of the most famous battle in World War II: The Battle of the Bulges. Stopp off here to take a look at the War Museum and the chance to have some lunch.");
+        mEvents.add(e);
+
+        // Depart Bastogne
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 14, 30, 0);
+        e.setTitle("Depart Bastogne");
+        e.setNotes("\t Depart from Bastogne");
+        mEvents.add(e);
+
+        // Arrive in Margraten
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 16, 0, 0);
+        e.setTitle("Margraten");
+        e.setNotes("\t Arrive in Margraten and the Margraten Cemetary. The WWII Netherlands American Cemetery and Memorial, Europe's third largest war cemetery for unidentified soldiers who died in WWII. Visit the cemetery and the Brass Choir" +
+                " perform taps.");
+        mEvents.add(e);
+
+        // Depart Margraten
+        e = new Event((TimeZone.getTimeZone(sParisZone)), 2015, 4, 3, 17, 30, 0);
+        e.setTitle("Depart Margraten");
+        e.setNotes("\t Depart from Margraten");
+        mEvents.add(e);
+
+        // Arrive in Maastricht
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 3, 18, 30, 0);
+        e.setTitle("Maastricht");
+        e.setNotes("\t Arrive in Maastricht and check into your hotel.");
+        mEvents.add(e);
+
+        // Dinner
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 3, 20, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("\t Dinner this evening will be served in your hotel restaurant in Maastricht.\n\n Overnight at NH Hotel, Maastricht");
+        mEvents.add(e);
+
+        // Day Five (4 April) -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Breakfast
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 4, 8, 0, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("\t Breakfast is served in your hotel");
+        mEvents.add(e);
+
+        // Tour of Maastricht
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 4, 10, 0, 0);
+        e.setTitle("Tour of Maastricht");
+        e.setNotes("\t Tour Ends at 3:30 pm. \n\n\t This morning depart on a guided coach and walking tour of maastricht taking you all around the old city on one side of the Maas River and the contemporary new Maastricht on the other." +
+                " Discover the ancient fortifications, seventeenth century townhouses the main square of the Vrijthof and the Markt. \n\nIndependent lunch in Maastricht");
+        mEvents.add(e);
+
+        // Boat Trip
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 4, 15, 0, 0);
+        e.setTitle("Boat Trip");
+        e.setNotes("\t Event ends at 6 pm.\n\n\t This afternoon take a short boat trip through the city passing the Bonnefanten Museum, the provincial government building and the slopes of the St. Pieters hill up to the Belgium border." +
+                " You will have the chance to go ashore at the St.Pieters Hill for a guided tour in the Marlstone caves before returning by boat to Maastricht");
+        mEvents.add(e);
+
+        // Dinner
 
 
     }
