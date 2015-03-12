@@ -367,8 +367,177 @@ public class EventsLab {
         mEvents.add(e);
 
         // Dinner
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 4, 20, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("\t Dinner will be served at a restaurant in Maastricht. The evening is left free, so you can explore the tiny cobble stoned " +
+                "streets of Maastricht and try some fires and mayonnaise, waffles, and chocolate. \n\nOvernight at NH Hotel, Maastricht");
+        mEvents.add(e);
+        
+        // Day Six (April 5th, Easter Sunday
+        
+        // Breakfast
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 7, 0, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("\t Happy Easter Sunday! Breakfast is served in your hotel.");
+        mEvents.add(e);
+        
+        // Depart for Aachen
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 8, 0, 0);
+        e.setTitle("Depart to Aachen");
+        e.setNotes("\t Depart for Aachen, Germany, located 30 minutes from Maastricht");
+        mEvents.add(e);
+        
+        // Guided tour of Aachen
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 8, 30, 0);
+        e.setTitle("Tour of Aachen");
+        e.setNotes("\t Take a guided walking tour of the city and visit Aachen Cathedral. The spa town of Aachen " +
+                "was favoured residence of Charlemagne, and later the place of coronation of the German Kings.\n\n Independent lunch.");
+        mEvents.add(e);
+        
+        // Return to Maastricht
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 12, 30, 0);
+        e.setTitle("Return to Maastricht");
+        e.setNotes("Return to Maastricht");
+        mEvents.add(e);
+        
+        // Performance Streetshow
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 14, 0, 0);
+        e.setTitle("Marching Performance");
+        e.setNotes("Performance / Streetshow for the marching band around Maastricht Old Town including the Maarkt and " +
+                "the Vrijthof.");
+        mEvents.add(e);
+        
+        // Technical rehearsal
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 16, 30, 0);
+        e.setTitle("Technical Rehearsal");
+        e.setNotes("\t Tehcnical rehearsal for the concert this evening.");
+        mEvents.add(e);
+        
+        // Dinner
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 18, 0, 0);
+        e.setTitle("Dinner");
+        e.setNotes("\t Dinner will be served at a restaurant in Maastricht near the Conservatorium");
+        mEvents.add(e);
 
+        // Performance
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 20, 0, 0);
+        e.setTitle("Performance");
+        e.setNotes("\t Performane for the Band and Orchestra at the Conservatorium - Maasticht Academy of Music. \n\n" +
+                " Overnight at NH Hotel, Maastricht");
+        mEvents.add(e);
 
+        // April 6th  Day 7??
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 6, 30, 0);
+        e.setTitle("Breakfast");
+        e.setNotes("\t Breakfast is served in your hotel.");
+        mEvents.add(e);
+
+        // Depart this morning
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 7, 30, 0);
+        e.setTitle("Depart for Paris");
+        e.setNotes("\t Depart this morning by coach to Paris");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 10, 0, 0);
+        e.setTitle("Arrive in Bruges");
+        e.setNotes("\t Arrive in Bruges, Belgium, and take a guided walking tour around the fairy-tale " +
+                "medieval city, to see Saint Salvator's Cathedral, the Belfry Tower, and the Old St John's " +
+                "Hospital.");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 12, 0, 0);
+        e.setTitle("Boat Ride");
+        e.setNotes("\t Continue your tour of the city by taking a 30 min boat ride along the canals in Bruges " +
+                "showing you the city from a different perspective and taking you to some of the hard to reach areas by " +
+                "foot or bus.");
+        mEvents.add(e);
+
+        e =  new Event(TimeZone.getTimeZone(sParisZone) ,2015, 4, 6, 14, 0, 0);
+        e.setTitle("Depart Bruges");
+        e.setNotes("\t Depart Bruges. En route stop in Waterloo to view the magnificent monument to one of the most decisive " +
+                "battles 100 years after Napolean lost to the Duke of Wellington.");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 18, 30, 0);
+        e.setTitle("Arrive in Paris");
+        e.setNotes("\t You will have the chance to check into your hotel and freshen up before dinner.");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 6, 20, 0, 0);
+        e.setTitle("Dinner + Eiffel Tower");
+        e.setNotes("\t Farewell dinner will be served in a restaurant in Paris. After dinner visit the Eiffel tower, perhaps " +
+                "Paris' most iconic landmark with a fansatsic view out across Paris, a marvellous Au Revior to our trip abroad. " +
+                "Afterwards stop to get some last minute souvenirs before returning to your hotel. \n\nOvernight at Novotel Paris Est, Paris.");
+        mEvents.add(e);
+
+        // Last day -----------------------------------------------------------------------------------------------------------------
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 6, 30, 0);
+        e.setTitle("Flight 41 Leaves Hotel");
+        e.setNotes("\t Flight 41 departures depart from the hotel.");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 7, 45, 0);
+        e.setTitle("Flight 49 Leaves Hotel");
+        e.setNotes("\t Flight 49 departures depart from the hotel.");
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 10, 0, 0);
+        e.setTitle("FLight 41 Departs");
+        e.setNotes("\t Flight 41 departs from Aeroports de Paris. Set to arrive in O'Hare at 12:25 local." +
+                "\n\n Flight Data:");
+        e.setDrawableId(R.drawable.plane_takeoff);
+        e.setIsFlight(true);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 11, 20, 0);
+        e.setTitle("Flight 49 Departs");
+        e.setNotes("\t Flight 49 departs for Dallas Fort Worth. Set to arrive at 3:20 pm local." +
+                "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.plane_takeoff);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Chicago"), 2015, 4, 7, 12, 25, 0);
+        e.setTitle("Flight 41 Touchdown");
+        e.setNotes("Flight 41 lands at O'Hare. Don't forget to transfer to fight 1611 in 4hr 35 min after landing (5pm local)" +
+                "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.plane_landing);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Chicago"), 2015, 4, 7, 15, 20, 0);
+        e.setTitle("Flight 49 Touchdown");
+        e.setNotes("Flight 49 lands at Dallas Fort worth. Remember to transfer to flight 1388 in 2 hours after landing (5:20pm local)" +
+                "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.plane_landing);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Chicago"), 2015, 4, 7, 17, 0, 0);
+        e.setTitle("Transfer 1611 Departs");
+        e.setNotes("Flight 1611 departs for San Fransisco International. Set to arrive at 7:26 local" +
+                "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.flight_transfer);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Chicago"), 2015, 4, 7, 17, 20, 0);
+        e.setTitle("Transfer 1388 Departs");
+        e.setNotes("FLight 1388 departs for San Fransisico International. Set to arrive at 7:16 local" +
+                "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setDrawableId(R.drawable.flight_transfer);
+
+        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 4, 7, )
     }
 
     public static EventsLab get(Context c) {

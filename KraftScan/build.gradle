@@ -48,6 +48,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:cardview-v7:+'
     compile 'com.msjBAND.kraftscangradle.library:zxing-android-release@aar'
     // Convenience library to launch the scanning and encoding Activities.
     // It automatically picks the best scanning library from the above two, depending on the
