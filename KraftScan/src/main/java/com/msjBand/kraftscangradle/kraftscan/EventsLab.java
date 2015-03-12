@@ -471,6 +471,11 @@ public class EventsLab {
         mEvents.add(e);
 
         // Last day -----------------------------------------------------------------------------------------------------------------
+        e= new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 6, 0, 0);
+        e.setTitle("Breakfast Info");
+        e.setNotes("Breakfast boxes will be prepared for breakfast this morning.");
+        mEvents.add(e);
+
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 6, 30, 0);
         e.setTitle("Flight 41 Leaves Hotel");
         e.setNotes("\t Flight 41 departures depart from the hotel.");
@@ -536,8 +541,28 @@ public class EventsLab {
                 "\n" +
                 " Flight Data:");
         e.setDrawableId(R.drawable.flight_transfer);
+        e.setIsFlight(true);
+        mEvents.add(e);
 
-        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 4, 7, )
+        // Landings
+        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 4, 7, 19, 16, 0);
+        e.setTitle("Flight 1388 Touchdown");
+        e.setNotes("Flight 1388 arrives at SFO." + "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.plane_landing);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 4, 7, 19, 56, 0);
+        e.setTitle("Flight 1611 Touchdown");
+        e.setNotes("Flight 1611 arrives at SFO." + "\n" +
+                "\n" +
+                " Flight Data:");
+        e.setIsFlight(true);
+        e.setDrawableId(R.drawable.plane_landing);
+        mEvents.add(e);
+
     }
 
     public static EventsLab get(Context c) {

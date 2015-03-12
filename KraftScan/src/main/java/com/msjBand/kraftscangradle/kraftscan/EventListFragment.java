@@ -41,7 +41,7 @@ public class EventListFragment extends ListFragment {
         getActivity().setTitle(R.string.event_title);
 
         mEvents = EventsLab.get(getActivity()).getEvents();
-        getListView().setDivider(null);
+        //getListView().setDivider(null);
 
 
         adapter = new EventAdapter(mEvents);

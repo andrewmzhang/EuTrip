@@ -3,26 +3,70 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-                android:padding="10dp"
-                android:gravity="left">
+              android:paddingTop="10dp"
+              android:paddingBottom="10dp"
+              android:paddingStart="25dp"
+              android:paddingLeft="25dp"
+              android:gravity="left">
 
-    <ImageView android:layout_width="60dp"
-               android:layout_height="60dp"
-               android:id="@+id/image_view"
-               android:adjustViewBounds="true"
-               />
-
-
-    <TextView
-            android:gravity="center|center_vertical"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:id="@+id/event_Title"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:src="@drawable/plane_takeoff"
+    <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/image_view"
+            android:adjustViewBounds="true"
+            android:src="@android:drawable/sym_call_incoming"
+            />
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingRight="20dp"
+            >
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp">
+
+            <TextView
+                    android:gravity="left|top"
+                    android:id="@+id/event_Title"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:src="@drawable/plane_takeoff"
+                    android:layout_width="wrap_content"
+                    android:text="Hello World"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="4:30 pm"
+                    />
+
+        </LinearLayout>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@android:drawable/ic_menu_add"
+                />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
 
 </LinearLayout>
