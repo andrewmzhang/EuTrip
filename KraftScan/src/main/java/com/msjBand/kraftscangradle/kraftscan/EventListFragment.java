@@ -7,6 +7,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,9 +27,10 @@ public class EventListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Event e = ((EventAdapter) getListAdapter()).getItem(position);
 
-        Intent i = new Intent(getActivity(), EventActivity.class);
+
+        Log.d(TAG, "send in " + position);
+        Intent i = new Intent(getActivity(), EventPagerActivity.class);
         i.putExtra(EventFragment.EVENT_ID, position);
         startActivity(i);
 
@@ -123,6 +125,10 @@ public class EventListFragment extends ListFragment {
             TextView titleTextView =
                     (TextView) convertView.findViewById(R.id.event_Title);
             titleTextView.setText(e.getTitle());
+
+            TextView timeDate =
+                    (TextView) convertView.findViewById(R.id.item_time_date);
+            timeDate.setText( e.getListDate()+ "\n" + e.getLocalTime() );
 
             return convertView;
 

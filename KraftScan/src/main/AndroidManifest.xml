@@ -19,6 +19,15 @@
             android:name=".EventActivity"
             android:label="@string/title_activity_event" >
         </activity>
+        <activity android:name=".EventPagerActivity"
+                  android:label="Event">
+
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".EventListActivity"
+                    />
+        </activity>
+
+
 
         <activity android:name=".StudentListActivity"
                   android:label="StudentListActivity"

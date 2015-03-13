@@ -44,7 +44,7 @@ public class EventsLab {
         // Arrival @ 5am
         Event e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
         e.setTitle("Airport SFO");
-        e.setNotes("Arrive at SFO American Airlines Domestic Departures Terminal 2");
+        e.setNotes("\t Arrive at SFO American Airlines Domestic Departures Terminal 2");
         e.setDrawableId(R.drawable.airport);
         mEvents.add(e);
 

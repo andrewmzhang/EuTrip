@@ -34,6 +34,11 @@ public class Event {
         mDate.set(year, month - 1, date, hourOfDay, minute, second);
         fmt = new SimpleDateFormat((
                 "h:mm:ss a EEEE, MMM d, yyyy"));
+        mId = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public int getDrawableId() {
@@ -78,12 +83,20 @@ public class Event {
         return fmt.format(mDate.getTime());
     }
 
-    public String getLocalTime() {
+    public String getListDate() {
         fmt.setTimeZone(mTimeZone);
+        fmt = new SimpleDateFormat("MMM d");
+        return fmt.format(mDate.getTime());
+    }
+
+    public String getLocalTime() {
         fmt = new SimpleDateFormat("h:mm a");
+        fmt.setTimeZone(mTimeZone);
         return fmt.format(mDate.getTime());
 
     }
+
+
 
     public String getGMT() {
         TimeZone obj = TimeZone.getTimeZone("GMT");
@@ -126,7 +139,8 @@ public class Event {
 
 
     public String getTimeZone() {
-        fmt = new SimpleDateFormat("zzz");
+        fmt = new SimpleDateFormat("zzzz");
+        fmt.setTimeZone(mTimeZone);
         return fmt.format(mDate.getTime());
     }
 

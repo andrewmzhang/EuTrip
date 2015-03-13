@@ -7,15 +7,6 @@
         android:orientation="vertical"
     >
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/event_fragment_title"
-            style="?android:listSeparatorTextViewStyle"
-            android:gravity="center"
-            android:textSize="22dp"
-            android:paddingTop="10dp"
-            />
 
     <TextView
             android:paddingTop="10dp"
@@ -67,8 +58,7 @@
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"/>
+                    android:paddingTop="2dp"/>
 
 
 
@@ -85,20 +75,14 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                 <TextView
-                        android:layout_weight="1"
+                        android:layout_weight="3"
                         android:id="@+id/event_fragment_date_label"
                         style="?android:listSeparatorTextViewStyle"
                         android:text="@string/date_label"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         />
-                <TextView
-                        android:id="@+id/event_fragment_timezone"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="?android:listSeparatorTextViewStyle"
-                        />
+
 
             </LinearLayout>
 
@@ -110,8 +94,7 @@
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"/>
+                    android:paddingTop="2dp"/>
 
         </LinearLayout>
 
@@ -119,6 +102,25 @@
 
 
     </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/event_fragment_timezone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:textSize="20sp"
+                        android:paddingBottom="5dp"
+                        />
+
+
+        </LinearLayout>
+
 
     <TextView
             style="@style/Base.TextAppearance.AppCompat.Display1"
@@ -130,7 +132,29 @@
             android:clickable="true"
             android:background="#ff48b1ff"
             android:textColor="@color/background_material_light" android:paddingTop="5dp" android:paddingBottom="7dp"
-            android:autoText="false"/>
+            android:autoText="false"
+            />
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:fillViewport="true"
+                android:layout_weight="1"
+                >
+                <TextView
+                        android:id="@+id/fragment_event_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20sp"
+                        />
+
+
+        </ScrollView>
 
 
 

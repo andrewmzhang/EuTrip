@@ -3,10 +3,13 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,17 +54,34 @@ public class EventFragment extends Fragment {
         int id = getArguments().getInt(EVENT_ID);
 
         mEvent = EventsLab.get(getActivity()).getEvent(id);
+        setHasOptionsMenu(true);
+
 
 
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                if (NavUtils.getParentActivityName(getActivity()) != null) {
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_event, parent, false);
-
-        mTitleText = (TextView) v.findViewById(R.id.event_fragment_title);
-        mTitleText.setText(mEvent.getTitle());
 
 
         mETAText = (TextView) v.findViewById(R.id.event_fragment_ETA);
@@ -92,6 +112,9 @@ public class EventFragment extends Fragment {
 
         mMyFlight = (TextView) v.findViewById(R.id.event_fragment_flight);
         updateTextView();
+
+        mDescription = (TextView) v.findViewById(R.id.fragment_event_description);
+        mDescription.setText(mEvent.getNotes());
 
 
 
