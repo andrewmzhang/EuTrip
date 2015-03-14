@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+        <TextView
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Remove Irrelevant Flights"
+                android:layout_weight="1"
+                />
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/checkbox_remove_irrelevant_flights"
+                />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+        <TextView
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Remove Past Events"
+                android:layout_weight="1"
+                />
+        <CheckBox
+                android:id="@+id/checkbox_remove_past_event"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+        <TextView
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Auto-Scroll To Current Event"
+                android:layout_weight="1"
+                />
+        <CheckBox
+                android:id="@+id/checkbox_auto_scroll"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+        <TextView
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Disable All Alarms"
+                android:layout_weight="1"
+                />
+        <CheckBox
+                android:id="@+id/checkbox_disable_all_events"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+        <TextView
+                android:id="@+id/current_name"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="You are:"
+                android:layout_weight="1"
+                />
+        <Button
+                android:id="@+id/reset_name"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Reset"
+                android:textStyle="normal"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

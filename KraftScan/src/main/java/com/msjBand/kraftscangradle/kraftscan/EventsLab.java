@@ -3,7 +3,6 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 import android.content.Context;
 
-import javax.xml.parsers.FactoryConfigurationError;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -13,6 +12,16 @@ import java.util.TimeZone;
  //       "\n\n Lunch at Leisure."
 
 public class EventsLab {
+
+    // Settings Data
+    private boolean removeIrrelevant;
+    private boolean isUserSet;
+    private String mUserName;
+    private boolean autoScroll;
+    private boolean removePastEvents;
+    private boolean disableAllAlarms;
+
+
 
     private static EventsLab sEventsLab;
     private String studentName;
@@ -38,6 +47,12 @@ public class EventsLab {
 
         mAppContext = appContext;
         mEvents = new ArrayList<Event>();
+
+        this.disableAllAlarms = false;
+        this.isUserSet = false;
+        mUserName = null;
+        this.removeIrrelevant = false;
+        this.removePastEvents = true;
 
 
 
@@ -563,6 +578,66 @@ public class EventsLab {
         e.setDrawableId(R.drawable.plane_landing);
         mEvents.add(e);
 
+
+
+
+    }
+
+
+    public boolean isDisableAllAlarms() {
+        return disableAllAlarms;
+    }
+
+    public void setDisableAllAlarms(boolean disableAllAlarms) {
+        this.disableAllAlarms = disableAllAlarms;
+    }
+
+    public boolean isUserset() {
+        return isUserSet;
+    }
+
+    public void setIsUserset(boolean isUserset) {
+        this.isUserSet = isUserset;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String userName) {
+        mUserName = userName;
+    }
+
+    public boolean isOnlyShowRelevant() {
+        return removeIrrelevant;
+    }
+
+    public void setOnlyShowRelevant(boolean onlyShowRelevant) {
+        this.removeIrrelevant = onlyShowRelevant;
+    }
+
+    public boolean isRemovePastEvents() {
+        return removePastEvents;
+    }
+
+    public void setRemovePastEvents(boolean removePastEvents) {
+        this.removePastEvents = removePastEvents;
+    }
+
+    public boolean isAutoScroll() {
+        return autoScroll;
+    }
+
+    public void setAutoScroll(boolean autoScroll) {
+        this.autoScroll = autoScroll;
+    }
+
+    public boolean isRemoveIrrelevant() {
+        return removeIrrelevant;
+    }
+
+    public void setRemoveIrrelevant(boolean removeIrrelevant) {
+        this.removeIrrelevant = removeIrrelevant;
     }
 
     public static EventsLab get(Context c) {

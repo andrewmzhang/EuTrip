@@ -7,8 +7,7 @@
         android:orientation="vertical"
     >
 
-
-    <TextView
+        <TextView
             android:paddingTop="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
