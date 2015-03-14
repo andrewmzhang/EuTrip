@@ -28,8 +28,6 @@ public class EventListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-
-        Log.d(TAG, "send in " + position);
         Intent i = new Intent(getActivity(), EventPagerActivity.class);
         i.putExtra(EventFragment.EVENT_ID, position);
         startActivity(i);
@@ -102,10 +100,12 @@ public class EventListFragment extends ListFragment {
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
                 imageView.setImageDrawable(Na);
+                e.setIsApplicable(false);
                 shape.getPaint().setColor(Color.RED);
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (isFlightOne) && (isFlight)) { // items is flight one, but person not flying flight one
                 imageView.setImageDrawable(Na);
+                e.setIsApplicable(false);
                 shape.getPaint().setColor(Color.RED);
                 imageView.setImageDrawable(shape);
             } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone

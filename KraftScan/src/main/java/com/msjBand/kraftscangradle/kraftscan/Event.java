@@ -22,6 +22,15 @@ public class Event {
     private boolean isFlight;
     private boolean isDepart;
     private int drawableId;
+    private boolean isApplicable;
+
+    public boolean isApplicable() {
+        return isApplicable;
+    }
+
+    public void setIsApplicable(boolean isApplicable) {
+        this.isApplicable = isApplicable;
+    }
 
     public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
         isFlight = false;
@@ -35,6 +44,7 @@ public class Event {
         fmt = new SimpleDateFormat((
                 "h:mm:ss a EEEE, MMM d, yyyy"));
         mId = UUID.randomUUID();
+        isApplicable = true;
     }
 
     public UUID getId() {
