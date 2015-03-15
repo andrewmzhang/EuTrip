@@ -7,15 +7,17 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,6 +26,14 @@ public class EventListFragment extends ListFragment {
     private ArrayList<Event> mEvents;
     private static final String TAG = "EventListFragment";
     private EventAdapter adapter;
+
+    private int Monday;
+    private int Tuesday;
+    private int Wednesday;
+    private int Thursday;
+    private int Friday;
+    private int Saturday;
+    private int Sunday;
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -40,6 +50,8 @@ public class EventListFragment extends ListFragment {
 
         getActivity().setTitle(R.string.event_title);
 
+        setRandomColours(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+
         mEvents = EventsLab.get(getActivity()).getEvents();
         //getListView().setDivider(null);
 
@@ -55,6 +67,47 @@ public class EventListFragment extends ListFragment {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
+
+
+    private void setRandomColours(int mon, int tues, int wed, int thurs, int fri, int sat, int sun) {
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(Color.parseColor("#ffc107"));
+        colors.add(Color.parseColor("#e91e63"));
+        colors.add(Color.parseColor("#9c27b0"));
+        colors.add(Color.parseColor("#673ab7"));
+        colors.add(Color.parseColor("#03a9f4"));
+        colors.add(Color.parseColor("#009688"));
+        colors.add(Color.parseColor("#4caf50"));
+        Collections.shuffle(colors);
+        Monday = colors.get(0);
+        Tuesday = colors.get(1);
+        Wednesday = colors.get(2);
+        Thursday = colors.get(3);
+        Friday = colors.get(4);
+        Saturday = colors.get(5);
+        Sunday = colors.get(6);
+
+    }
+
+    private int retriveColor(String name) {
+        if(name.equals("Monday"))
+            return Monday;
+        else if (name.equals("Tuesday"))
+            return Tuesday;
+        else if (name.equals("Wednesday"))
+            return Wednesday;
+        else if (name.equals("Thursday"))
+            return Thursday;
+        else if (name.equals("Friday"))
+            return Friday;
+        else if (name.equals("Saturday"))
+            return Saturday;
+        else if (name.equals("Sunday"))
+            return Sunday;
+        else
+            return Color.TRANSPARENT;
+    }
+
 
     @Deprecated
     @SuppressWarnings("16")
@@ -93,7 +146,7 @@ public class EventListFragment extends ListFragment {
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(Color.GREEN);
                 imageView.setBackgroundDrawable(shape);
-            } else if ((flightstatus == -1) && (isFlight) && (isFlight)) { // items is a flight, but flight status unknown
+            } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(Color.CYAN);
@@ -120,7 +173,10 @@ public class EventListFragment extends ListFragment {
                 imageView.setBackgroundDrawable(shape);
             }
 
+            ImageView weekDay = (ImageView) convertView.findViewById(R.id.day_of_week);
 
+            TextDrawable dayOfWeek = TextDrawable.builder().buildRound(event.getDayOfWeek(), retriveColor(event.getFullWeekDay()));
+            weekDay.setImageDrawable(dayOfWeek);
 
             TextView titleTextView =
                     (TextView) convertView.findViewById(R.id.event_Title);

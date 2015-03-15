@@ -106,6 +106,12 @@ public class Event {
 
     }
 
+    public String getDayOfWeek() {
+        fmt = new SimpleDateFormat("ccccc");
+        fmt.setTimeZone(mTimeZone);
+        return fmt.format(mDate.getTime());
+    }
+
 
 
     public String getGMT() {
@@ -150,6 +156,11 @@ public class Event {
 
     public String getTimeZone() {
         fmt = new SimpleDateFormat("zzzz");
+        fmt.setTimeZone(mTimeZone);
+        return fmt.format(mDate.getTime());
+    }
+    public String getFullWeekDay() {
+        fmt = new SimpleDateFormat("cccc");
         fmt.setTimeZone(mTimeZone);
         return fmt.format(mDate.getTime());
     }
