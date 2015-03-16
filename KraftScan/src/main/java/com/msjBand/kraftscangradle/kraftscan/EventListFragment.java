@@ -160,7 +160,7 @@ public class EventListFragment extends ListFragment {
                 imageView.setImageDrawable(Na);
                 e.setIsApplicable(false);
                 shape.getPaint().setColor(Color.RED);
-                imageView.setImageDrawable(shape);
+                imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);

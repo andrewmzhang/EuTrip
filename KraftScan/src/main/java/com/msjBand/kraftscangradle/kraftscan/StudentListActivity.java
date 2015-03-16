@@ -7,6 +7,6 @@ public class StudentListActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
-        return new FlightListFragment();
+        return new SetFlightFragment();
     }
 }

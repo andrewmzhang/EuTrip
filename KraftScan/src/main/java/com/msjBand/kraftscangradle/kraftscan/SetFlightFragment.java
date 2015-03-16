@@ -1,28 +1,33 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FlightListFragment extends Fragment {
+public class SetFlightFragment extends Fragment {
 
     private static final String TAG = "Flight2283ListFragment";
     private ArrayList<String> mPeople;
     private ArrayAdapter<String> adapter;
     private EditText mSearchBar;
     private ListView mListView;
+
+    public String Flight2283 = "TagIdentifier2283";
+    public String Flight2411 = "TagIdentifier2411";
+    public String ActivityStart = "ActivityStart";
+
+    private String startStatus;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,9 +65,21 @@ public class FlightListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = adapter.getItem(position);
-                EventsLab.get(getActivity()).setStudentName(name);
-                Log.d(TAG, "Set name to" + name + " Status: " + EventsLab.get(getActivity()).getFlightOne());
-                getActivity().finish();
+                if (name.equals("Harrison Cheng")) {
+                    Toast.makeText(getActivity(), "Go use the other app...", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    EventsLab.get(getActivity()).setStudentName(name);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    if (fm.getBackStackEntryCount() > 0)
+                        fm.popBackStack();
+                    else
+                        getActivity().finish();
+                }
+
             }
         });
 
@@ -75,6 +92,9 @@ public class FlightListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         setRetainInstance(true);
+
+
+
     }
 
 
@@ -82,7 +102,7 @@ public class FlightListFragment extends Fragment {
 
 
     private ArrayList<String> populatePeople(ArrayList<String> arrayList) {
-
+// FLight group 2283
         arrayList.add("Monica Kraft");
         arrayList.add("Wenhan Fang");
         arrayList.add("Sathvik Vivek");
@@ -171,6 +191,87 @@ public class FlightListFragment extends Fragment {
         arrayList.add("Derek Xia");
         arrayList.add("Akshita Gandra");
         arrayList.add("Teresa Hsu");
+
+        // Flight 2411
+
+        arrayList.add("Mark Aherns");
+        arrayList.add("Evan Lwin");
+        arrayList.add("Joyce Wang");
+        arrayList.add("Julie ChenYi Wang");
+        arrayList.add("Aimee Xu");
+        arrayList.add("Emma Chang");
+        arrayList.add("Claire Wu");
+        arrayList.add("Apoorva Prakash");
+        arrayList.add("Kosh Kumar");
+        arrayList.add("Hsien-Hsiang Lin");
+        arrayList.add("Harrison Cheng");
+        arrayList.add("Kelly Shi");
+        arrayList.add("Savana Wang");
+        arrayList.add("Justin Nguyen");
+        arrayList.add("Fendy Gao");
+        arrayList.add("Serena Young");
+        arrayList.add("Marianne Rara");
+        arrayList.add("Ann Kwan");
+        arrayList.add("Jonathan Bright Li");
+        arrayList.add("Stephanie Bi");
+        arrayList.add("Ashley Chen");
+        arrayList.add("Jennifer Wei");
+        arrayList.add("Nikhita Ganesh");
+        arrayList.add("Maya Sudarsan");
+        arrayList.add("Aaron Zhang");
+        arrayList.add("Jerry Lin");
+        arrayList.add("Li Diao");
+        arrayList.add("Claudia Fort");
+        arrayList.add("Anna Pi");
+        arrayList.add("Vivian Ross");
+        arrayList.add("Leon Ming");
+        arrayList.add("Varsha Rajagopalan");
+        arrayList.add("William Zeng");
+        arrayList.add("Donna li");
+        arrayList.add("Vineeth Yeevani");
+        arrayList.add("Kiran Raja");
+        arrayList.add("Raja Jayakumar");
+        arrayList.add("Margaret Taylor");
+        arrayList.add("Nivedha Karthikeyan");
+        arrayList.add("Kate Lin");
+        arrayList.add("Anjali Joseph");
+        arrayList.add("Jolene Tsai");
+        arrayList.add("Sabrina Liu");
+        arrayList.add("Joyce Pi");
+        arrayList.add("An Tran");
+        arrayList.add("Khang Tran");
+        arrayList.add("Thach Ngo Tran");
+        arrayList.add("Lesley Wilhite");
+        arrayList.add("Kunal Agarwal");
+        arrayList.add("Cory Lam");
+        arrayList.add("Colby Huang");
+        arrayList.add("Brian Zhao");
+        arrayList.add("Alexander Chen");
+        arrayList.add("Sai Dwibhashyam");
+        arrayList.add("Ashank Verma");
+        arrayList.add("Victor He");
+        arrayList.add("Li Deng");
+        arrayList.add("Yue Zhao");
+        arrayList.add("Sara Tsai");
+        arrayList.add("Jessica Eng");
+        arrayList.add("Douglas Lam");
+        arrayList.add("Angus Fung");
+        arrayList.add("William Luk");
+        arrayList.add("Kathleen Zhou");
+        arrayList.add("Brandon Lu");
+        arrayList.add("Diana Minyi Lu");
+        arrayList.add("Raymond Mendonca");
+        arrayList.add("Jessica Mao");
+        arrayList.add("Delaine Rogers");
+        arrayList.add("Annie Xu");
+        arrayList.add("Lyann Choi");
+        arrayList.add("Rushalee Nirodi");
+        arrayList.add("Myra Awan");
+        arrayList.add("Danice Long");
+        arrayList.add("Diana Gia Tran");
+
+
+
         Collections.sort(arrayList, String.CASE_INSENSITIVE_ORDER);
 
 

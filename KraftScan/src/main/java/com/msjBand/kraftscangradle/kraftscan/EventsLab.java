@@ -40,6 +40,14 @@ public class EventsLab {
             "\n\nJean Jea\nEmily Xu\nAngela Yang\nMallika Chatterjee\nTanushri Sundar\nKevin Zhang\nIrene Yin\nVivasvan Vykunta\nZachary Kekoa\nAlexia Kekoa\nHerkea Jea" +
             "\n\nSamuel Chou\nAneri Parikh\nSeona Patel\nKenneth Leung\nAlex Yin\nRohan Nair\nShiva Ramani\nNicole Hsu\nDerek Xia\nAkshita Gandra\nTeresa Hsu";
 
+    private String Flight2411Roster = "\tMark Aherns\n\tEvan Lwin\n\tJoyce Wang\n\tJulie ChenYi Wang\n\tAimee Xu\n\tEmma Chang\n\tClaire Wu\n\tApoorva Prakash\n\tKosh Kumar\n\tHsien-Hsiang Lin\n" +
+            "\n\tHarrison Cheng\n\tKelly Shi\n\tSavana Wang\n\tJustin Nguyen\n\tFendy Gao\n\tSerena Young\n\tMarianne Rara" +
+            "\n\n\tAnn Kwan\n\tJonathan Bright Li\n\tStephanie Bi\n\tAshley Chen\n\tJennifer Wei\n\tNikhita Ganesh\n\tMaya Sudarsan\n\tAaron Zhang\n\tJerry Lin\n\tLi Diao" +
+            "\n\n\tClaudia Fort\n\tAnna Pi\n\tVivian Ross\n\tLeon Ming\n\tVarsha Rajagopalan\n\tWilliam Zeng\n\tDonna li\n\tVineeth Yeevani\n\tKiran Raja\n\tRaja Jayakumar" +
+            "\n\n\tMargaret Taylor\n\tNivedha Karthikeyan\n\tKate Lin\n\tAnjali Joseph (Mitter)\nJolene Tsai\n\tSabrina Liu\n\tJoyce Pi\n\tAn Tran\n\tKhang Tran\n\tThach Ngo Tran" +
+            "\n\n\tLesley Wilhite\n\tKunal Agarwal\n\tCory Lam\n\tColby Huang\n\tBrian Zhao\n\tAlexander Chen\n\tSai Dwibhashyam\n\tAshank Verma\n\tVictor He\n\tLi Deng" +
+            "\n\n\tYue Zhao\n\tSara Tsai\n\tJessica Eng\n\tDouglas Lam\n\tAngus Fung\n\tWilliam Luk\n\tKathleen Zhou\n\tBrandon Lu\n\tDiana Minyi Lu" +
+            "\n\n\tRaymond Mendonca\n\tJessica Mao\n\tDelaine Rogers\n\tAnnie Xu\n\tLyann Choi\n\tRushalee Nirodi\n\tMyra Awan\n\tDanice Long\n\tDiana Gia Tran";
 
     private int mFlightOne = -1;   //-1 is unknown, 0 is not on Flight One (2283), 1 is on Flight One
 
@@ -53,7 +61,6 @@ public class EventsLab {
         mUserName = null;
         this.removeIrrelevant = false;
         this.removePastEvents = true;
-
 
 
         // Arrival @ 5am
@@ -427,7 +434,7 @@ public class EventsLab {
         e.setNotes("\t Happy Easter Sunday! Breakfast is served in your hotel.");
         e.setDrawableId(R.drawable.food);
         mEvents.add(e);
-        
+
         // Depart for Aachen
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 8, 0, 0);
         e.setTitle("Depart to Aachen");
@@ -457,14 +464,14 @@ public class EventsLab {
                 "the Vrijthof.");
         e.setDrawableId(R.drawable.note);
         mEvents.add(e);
-        
+
         // Technical rehearsal
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 16, 30, 0);
         e.setTitle("Technical Rehearsal");
         e.setNotes("\t Technical rehearsal for the concert this evening.");
         e.setDrawableId(R.drawable.noon);
         mEvents.add(e);
-        
+
         // Dinner
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 5, 18, 0, 0);
         e.setTitle("Dinner");
@@ -532,7 +539,7 @@ public class EventsLab {
         mEvents.add(e);
 
         // Last day -----------------------------------------------------------------------------------------------------------------
-        e= new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 6, 0, 0);
+        e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 6, 0, 0);
         e.setTitle("Breakfast Info");
         e.setNotes("Breakfast boxes will be prepared for breakfast this morning.");
         e.setDrawableId(R.drawable.food);
@@ -721,9 +728,12 @@ public class EventsLab {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+        mFlightOne = -1;
 
         if ((Flight2283Roster.toLowerCase()).contains(studentName.toLowerCase()))
             mFlightOne = 1;
+        else if ((Flight2411Roster.toLowerCase()).contains(studentName.toLowerCase()))
+            mFlightOne = 0;
 
     }
 

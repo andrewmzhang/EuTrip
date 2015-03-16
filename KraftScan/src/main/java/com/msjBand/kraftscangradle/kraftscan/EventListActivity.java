@@ -2,6 +2,7 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,8 +11,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -21,11 +24,14 @@ import java.util.ArrayList;
 
 public class EventListActivity extends ActionBarActivity {
 
-    private ArrayList<String> mSettings;
+    public ArrayList<String> mSettings;
     private DrawerLayout mDrawerLayout;
     private RelativeLayout mDrawerRelativeLayout;
-    private ListView mDrawerList;
+    public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private ArrayAdapter<String> adapter;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class EventListActivity extends ActionBarActivity {
         setContentView(R.layout.fragment_events_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -46,13 +53,46 @@ public class EventListActivity extends ActionBarActivity {
 
         }
         mSettings = new ArrayList<String>();
-        mSettings.add("Hello");
+        if (EventsLab.get(getApplicationContext()).getStudentName() == null)
+            mSettings.add("Set Name");
+        else
+            mSettings.add(EventsLab.get(getApplicationContext()).getStudentName());
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                mSettings);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primary_dark));
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                mSettings));
+        mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentManager fm = getSupportFragmentManager();
+
+
+                if ((position == 0) && fm.getBackStackEntryCount() < 1) {
+                    Fragment fragment = new SetFlightFragment();
+                    fm = getSupportFragmentManager();
+                    fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.content_frame, fragment).addToBackStack("detail").commit();
+                    mDrawerList.setItemChecked(position, true);
+                    mDrawerLayout.closeDrawers();
+                }
+
+                if ((position == 0) && fm.getBackStackEntryCount() >= 1) {
+                    fm.popBackStack();
+                    Fragment fragment = new SetFlightFragment();
+                    fm = getSupportFragmentManager();
+                    fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.content_frame, fragment).addToBackStack("detail").commit();
+                    mDrawerList.setItemChecked(position, true);
+                    mDrawerLayout.closeDrawers();
+                }
+
+
+
+            }
+        });
+
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -61,14 +101,26 @@ public class EventListActivity extends ActionBarActivity {
                 R.string.drawer_open,
                 R.string.drawer_close
                 ) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (EventsLab.get(getApplicationContext()).getStudentName() == null)
+                    mSettings.set(0, "Set Name");
+                else
+                    mSettings.set(0, EventsLab.get(getApplicationContext()).getStudentName());
+                adapter.notifyDataSetChanged();
+                super.onDrawerSlide(drawerView, slideOffset);
+            }
+
             public void onDrawerOpened(View drawerView) {
+
                 super.onDrawerOpened(drawerView);
+
             }
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("Trip Events");
             }
+
 
         };
 
@@ -104,10 +156,6 @@ public class EventListActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
 
 }
