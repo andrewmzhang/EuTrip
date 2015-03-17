@@ -14,12 +14,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+
+
+
 
 
 public class EventListActivity extends ActionBarActivity {
@@ -30,6 +34,22 @@ public class EventListActivity extends ActionBarActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private ArrayAdapter<String> adapter;
+
+    public class DrawerAdapter extends ArrayAdapter<String> {
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.)
+
+            }
+
+
+
+
+        }
+    }
 
 
 
