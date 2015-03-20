@@ -41,7 +41,7 @@ public class EventListActivity extends ActionBarActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.)
+                convertView = getLayoutInflater().inflate(R.layout.settings_item);
 
             }
 
