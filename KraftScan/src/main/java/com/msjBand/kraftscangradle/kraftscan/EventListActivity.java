@@ -15,15 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.*;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-
-
-
+import java.util.List;
 
 
 public class EventListActivity extends ActionBarActivity {
@@ -34,17 +30,53 @@ public class EventListActivity extends ActionBarActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private ArrayAdapter<String> adapter;
+    public int lastPosition = 100;
 
     public class DrawerAdapter extends ArrayAdapter<String> {
+
+        public DrawerAdapter(List<String> Strings) {
+
+            super(getApplicationContext(), 0, Strings);
+
+
+        }
+
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.settings_item);
+                convertView = getLayoutInflater().inflate(R.layout.settings_item, null);
+            }
+            EventsLab lab = EventsLab.get(getApplicationContext());
+
+            TextView main;
+            main = (TextView) convertView.findViewById(R.id.text_main);
+
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox_1);
+
+            if(position == 0) {
+                main.setText(lab.getStudentName());
+                checkBox.setVisibility(View.GONE);
+            }
+
+            if(position == 1) {
+                main.setText("Remove Irrelevant Flights");
+                checkBox.setClickable(false);
+                checkBox.setChecked(EventsLab.get(getApplicationContext()).isRemoveIrrelevant());
+            }
+
+
+            if (position == 2) {
+                main.setText("Disable Notifications");
+                checkBox.setClickable(false);
+                checkBox.setChecked(lab.isDisableAllAlarms());
 
             }
 
+
+
+            return convertView;
 
 
 
@@ -52,6 +84,12 @@ public class EventListActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() < 1)
+            lastPosition = 11;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,13 +111,12 @@ public class EventListActivity extends ActionBarActivity {
 
         }
         mSettings = new ArrayList<String>();
-        if (EventsLab.get(getApplicationContext()).getStudentName() == null)
-            mSettings.add("Set Name");
-        else
-            mSettings.add(EventsLab.get(getApplicationContext()).getStudentName());
+        mSettings.add("1");
+        mSettings.add("2");
+        mSettings.add("3");
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                mSettings);
+
+        adapter = new DrawerAdapter(mSettings);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primary_dark));
@@ -89,29 +126,44 @@ public class EventListActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager fm = getSupportFragmentManager();
+                int count = fm.getBackStackEntryCount();
 
 
-                if ((position == 0) && fm.getBackStackEntryCount() < 1) {
+                if ((position == 0) && ((position != lastPosition) || count < 1) ) {
+                    if ( count >= 1)
+                        fm.popBackStack();
                     Fragment fragment = new SetFlightFragment();
-                    fm = getSupportFragmentManager();
                     fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.content_frame, fragment).addToBackStack("detail").commit();
+                    lastPosition = position;
                     mDrawerList.setItemChecked(position, true);
                     mDrawerLayout.closeDrawers();
                 }
 
-                if ((position == 0) && fm.getBackStackEntryCount() >= 1) {
-                    fm.popBackStack();
-                    Fragment fragment = new SetFlightFragment();
-                    fm = getSupportFragmentManager();
-                    fm.beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.content_frame, fragment).addToBackStack("detail").commit();
-                    mDrawerList.setItemChecked(position, true);
-                    mDrawerLayout.closeDrawers();
+
+                if (position == 1) {
+                    if(EventsLab.get(getApplicationContext()).getFlightOne() != -1) {
+                        EventsLab.get(getApplicationContext()).setRemoveIrrelevant(!EventsLab.get(getApplicationContext()).isRemoveIrrelevant());
+                        adapter.notifyDataSetChanged();
+                        mDrawerList.setItemChecked(position, true);
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Name Must Be Set!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
+
+                if (position == 2) {
+                    EventsLab.get(getApplicationContext()).setDisableAllAlarms(!EventsLab.get(getApplicationContext()).isDisableAllAlarms());
+                    adapter.notifyDataSetChanged();
+                    mDrawerList.setItemChecked(position, true);
+                }
+
 
 
 
             }
         });
+
+
 
 
         mDrawerToggle = new ActionBarDrawerToggle(

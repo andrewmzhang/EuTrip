@@ -5,16 +5,16 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.amulyakhare.textdrawable.TextDrawable;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +26,10 @@ public class EventListFragment extends ListFragment {
     private ArrayList<Event> mEvents;
     private static final String TAG = "EventListFragment";
     private EventAdapter adapter;
+
+    private Handler mHandler;
+    private Runnable mUpdate;
+    private boolean previousState;
 
     private int Monday;
     private int Tuesday;
@@ -44,6 +48,8 @@ public class EventListFragment extends ListFragment {
 
     }
 
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -55,10 +61,46 @@ public class EventListFragment extends ListFragment {
         mEvents = EventsLab.get(getActivity()).getEvents();
         //getListView().setDivider(null);
 
+        previousState = EventsLab.get(getActivity()).isRemoveIrrelevant();
+
+
 
         adapter = new EventAdapter(mEvents);
+
         setListAdapter(adapter);
-        getListView().smoothScrollToPosition(10);
+
+
+
+        mHandler = new Handler();
+        mUpdate = new Runnable() {
+            @Override
+            public void run() {
+                if (previousState != EventsLab.get(getActivity()).isRemoveIrrelevant()) {
+                    if (EventsLab.get(getActivity()).isRemoveIrrelevant() == true) {
+                        System.out.println("Hellop");
+                        mEvents.clear();
+                        if (EventsLab.get(getActivity()).getFlightOne() == 1)
+                            mEvents.addAll(EventsLab.get(getActivity()).getFlightOneEvents());
+                        if (EventsLab.get(getActivity()).getFlightOne() == 0)
+                            mEvents.addAll(EventsLab.get(getActivity()).getFlightTwoEvents());
+                        else {
+                            mEvents.addAll(EventsLab.get(getActivity()).getNormalEvents());
+
+                        }
+                    }
+                    else {
+                        mEvents.clear();
+                        mEvents.addAll(EventsLab.get(getActivity()).getNormalEvents());
+                    }
+                    previousState = EventsLab.get(getActivity()).isRemoveIrrelevant();
+
+                    adapter.notifyDataSetChanged();
+                }
+
+                mHandler.postDelayed(this, 2000);
+            }
+        };
+        mHandler.postDelayed(mUpdate, 0);
 
     }
 
@@ -113,8 +155,25 @@ public class EventListFragment extends ListFragment {
     @SuppressWarnings("16")
     private class EventAdapter extends ArrayAdapter<Event> {
 
-        public EventAdapter(List<Event> Events) {
+        private Filter filter;
+        private final Object mLock = new Object();
+        public ArrayList<Event> mItems;
+        private int count;
+
+        public EventAdapter(ArrayList<Event> Events) {
             super(getActivity(), 0, Events);
+            mItems = Events;
+            count = mItems.size();
+
+        }
+
+        @Override
+        public int getCount() {
+            return mItems.size();
+        }
+
+        public void setCount(ArrayList<Event> Events) {
+            count  = Events.size();
         }
 
         @Override
@@ -145,6 +204,7 @@ public class EventListFragment extends ListFragment {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(Color.GREEN);
+                e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
                 Drawable image = getResources().getDrawable(event.getDrawableId());
@@ -153,18 +213,19 @@ public class EventListFragment extends ListFragment {
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
                 imageView.setImageDrawable(Na);
-                e.setIsApplicable(false);
+                e.setIsApplicable("f");
                 shape.getPaint().setColor(Color.RED);
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (isFlightOne) && (isFlight)) { // items is flight one, but person not flying flight one
                 imageView.setImageDrawable(Na);
-                e.setIsApplicable(false);
+                e.setIsApplicable("f");
                 shape.getPaint().setColor(Color.RED);
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(Color.GREEN);
+                e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
@@ -190,7 +251,14 @@ public class EventListFragment extends ListFragment {
 
 
         }
+
+
+
+
+
+
     }
 
-
 }
+
+
