@@ -1,6 +1,7 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -113,13 +114,14 @@ public class EventListFragment extends ListFragment {
 
     private void setRandomColours(int mon, int tues, int wed, int thurs, int fri, int sat, int sun) {
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(Color.parseColor("#ffc107"));
-        colors.add(Color.parseColor("#e91e63"));
-        colors.add(Color.parseColor("#9c27b0"));
-        colors.add(Color.parseColor("#673ab7"));
-        colors.add(Color.parseColor("#03a9f4"));
-        colors.add(Color.parseColor("#009688"));
-        colors.add(Color.parseColor("#4caf50"));
+        Resources res = getResources();
+        colors.add(res.getColor(R.color.deepOrange));
+        colors.add(res.getColor(R.color.orange));
+        colors.add(res.getColor(R.color.lightGreen));
+        colors.add(res.getColor(R.color.pink));
+        colors.add(res.getColor(R.color.teal));
+        colors.add(res.getColor(R.color.blueGrey));
+        colors.add(res.getColor(R.color.deepPurple));
         Collections.shuffle(colors);
         Monday = colors.get(0);
         Tuesday = colors.get(1);
@@ -203,34 +205,34 @@ public class EventListFragment extends ListFragment {
             if ((flightstatus == 1) && (isFlightOne) && (isFlight)){ // items is both flight 1 and person is flight one
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
-                shape.getPaint().setColor(Color.GREEN);
+                shape.getPaint().setColor(getResources().getColor(R.color.green));
                 e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
-                shape.getPaint().setColor(Color.CYAN);
+                shape.getPaint().setColor(getResources().getColor(R.color.cyan));
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
                 imageView.setImageDrawable(Na);
                 e.setIsApplicable("f");
-                shape.getPaint().setColor(Color.RED);
+                shape.getPaint().setColor(getResources().getColor(R.color.red));
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (isFlightOne) && (isFlight)) { // items is flight one, but person not flying flight one
                 imageView.setImageDrawable(Na);
                 e.setIsApplicable("f");
-                shape.getPaint().setColor(Color.RED);
+                shape.getPaint().setColor(getResources().getColor(R.color.red));
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
-                shape.getPaint().setColor(Color.GREEN);
+                shape.getPaint().setColor(getResources().getColor(R.color.green));
                 e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
-                shape.getPaint().setColor(Color.BLUE);
+                shape.getPaint().setColor(getResources().getColor(R.color.blue));
                 imageView.setBackgroundDrawable(shape);
             }
 
