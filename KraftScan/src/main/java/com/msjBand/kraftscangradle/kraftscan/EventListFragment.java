@@ -25,8 +25,9 @@ import java.util.List;
 public class EventListFragment extends ListFragment {
 
     private ArrayList<Event> mEvents;
-    private static final String TAG = "EventListFragment";
+    public static final String TAG = "EventListFragment";
     private EventAdapter adapter;
+    private String previousName = "";
 
     private Handler mHandler;
     private Runnable mUpdate;
@@ -58,8 +59,10 @@ public class EventListFragment extends ListFragment {
         getActivity().setTitle(R.string.event_title);
 
         setRandomColours(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+        mEvents = new ArrayList<Event>();
 
-        mEvents = EventsLab.get(getActivity()).getEvents();
+
+        mEvents.addAll(EventsLab.get(getActivity()).getEvents());
         //getListView().setDivider(null);
 
         previousState = EventsLab.get(getActivity()).isRemoveIrrelevant();
@@ -76,28 +79,8 @@ public class EventListFragment extends ListFragment {
         mUpdate = new Runnable() {
             @Override
             public void run() {
-                if (previousState != EventsLab.get(getActivity()).isRemoveIrrelevant()) {
-                    if (EventsLab.get(getActivity()).isRemoveIrrelevant() == true) {
-                        System.out.println("Hellop");
-                        mEvents.clear();
-                        if (EventsLab.get(getActivity()).getFlightOne() == 1)
-                            mEvents.addAll(EventsLab.get(getActivity()).getFlightOneEvents());
-                        if (EventsLab.get(getActivity()).getFlightOne() == 0)
-                            mEvents.addAll(EventsLab.get(getActivity()).getFlightTwoEvents());
-                        else {
-                            mEvents.addAll(EventsLab.get(getActivity()).getNormalEvents());
 
-                        }
-                    }
-                    else {
-                        mEvents.clear();
-                        mEvents.addAll(EventsLab.get(getActivity()).getNormalEvents());
-                    }
-                    previousState = EventsLab.get(getActivity()).isRemoveIrrelevant();
-
-                    adapter.notifyDataSetChanged();
-                }
-
+                sendFilters();
                 mHandler.postDelayed(this, 2000);
             }
         };
@@ -105,9 +88,26 @@ public class EventListFragment extends ListFragment {
 
     }
 
+    public void sendFilters() {
+        if ((previousState != EventsLab.get(getActivity()).isRemoveIrrelevant()) || (previousName !=  EventsLab.get(getActivity()).getName())) {
+            if (EventsLab.get(getActivity()).isRemoveIrrelevant() == true) {
+                System.out.println("Hellop");
+                adapter.getFilter().filter("t");
+            }
+            else {
+                adapter.getFilter().filter(null);
+            }
+            previousState = EventsLab.get(getActivity()).isRemoveIrrelevant();
+
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        sendFilters();
         adapter.notifyDataSetChanged();
     }
 
@@ -153,6 +153,7 @@ public class EventListFragment extends ListFragment {
     }
 
 
+
     @Deprecated
     @SuppressWarnings("16")
     private class EventAdapter extends ArrayAdapter<Event> {
@@ -193,9 +194,9 @@ public class EventListFragment extends ListFragment {
 
             int flightstatus = eventsLab.getFlightOne();
             Event event = mEvents.get(position);
-            Boolean isFlightOne = event.getIsFlightOne();
-            Boolean isFlight = event.getIsFlight();
-            Boolean isDepart = event.isDepart();
+            Boolean isFlightOne = e.getIsFlightOne();
+            Boolean isFlight = e.getIsFlight();
+            Boolean isDepart = e.isDepart();
 
             ImageView imageView = (ImageView) convertView.findViewById(R.id.image_view);
 
@@ -206,7 +207,6 @@ public class EventListFragment extends ListFragment {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(getResources().getColor(R.color.green));
-                e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
                 Drawable image = getResources().getDrawable(event.getDrawableId());
@@ -215,19 +215,16 @@ public class EventListFragment extends ListFragment {
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
                 imageView.setImageDrawable(Na);
-                e.setIsApplicable("f");
                 shape.getPaint().setColor(getResources().getColor(R.color.red));
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (isFlightOne) && (isFlight)) { // items is flight one, but person not flying flight one
                 imageView.setImageDrawable(Na);
-                e.setIsApplicable("f");
                 shape.getPaint().setColor(getResources().getColor(R.color.red));
                 imageView.setBackgroundDrawable(shape);
             } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
                 shape.getPaint().setColor(getResources().getColor(R.color.green));
-                e.setIsApplicable("t");
                 imageView.setBackgroundDrawable(shape);
             } else {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
@@ -255,10 +252,56 @@ public class EventListFragment extends ListFragment {
         }
 
 
+        private class EventsFilter extends Filter {
+            private boolean constraintState;
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
 
 
+                if (constraint == null) {
+                    results.values = EventsLab.get(getActivity()).getMasterEvents();
+                    results.count = EventsLab.get(getActivity()).getMasterEvents().size();
+
+                } else {
 
 
+                    ArrayList<Event> events = new ArrayList<Event>();
+
+                    for (Event e : mEvents) {
+                        if (e.isApplicable()) {
+                            events.add(e);
+                        }
+                    }
+
+                    results.values = events;
+                    results.count = events.size();
+
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mEvents.clear();
+                mEvents.addAll((ArrayList)results.values);
+                notifyDataSetChanged();
+
+            }
+
+        }
+
+        @Override
+        public Filter getFilter() {
+
+            if (filter == null);
+                filter = new EventsFilter();
+
+            return filter;
+
+        }
     }
 
 }

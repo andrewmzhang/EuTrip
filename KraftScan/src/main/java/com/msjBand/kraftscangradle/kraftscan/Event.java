@@ -22,13 +22,13 @@ public class Event {
     private boolean isFlight;
     private boolean isDepart;
     private int drawableId;
-    private String isApplicable = "t";
+    private boolean isApplicable = true;
 
-    public String isApplicable() {
+    public Boolean isApplicable() {
         return isApplicable;
     }
 
-    public void setIsApplicable(String isApplicable) {
+    public void setIsApplicable(Boolean isApplicable) {
         this.isApplicable = isApplicable;
     }
 
@@ -44,7 +44,7 @@ public class Event {
         fmt = new SimpleDateFormat((
                 "h:mm:ss a EEEE, MMM d, yyyy"));
         mId = UUID.randomUUID();
-        isApplicable = "t";
+        isApplicable = true;
     }
 
     public UUID getId() {

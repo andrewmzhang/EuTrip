@@ -1,5 +1,6 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.Collections;
 
 public class SetFlightFragment extends Fragment {
 
-    private static final String TAG = "Flight2283ListFragment";
+    public static final String TAG = "Flight2283ListFragment";
     private ArrayList<String> mPeople;
     private ArrayAdapter<String> adapter;
     private EditText mSearchBar;
@@ -65,15 +68,18 @@ public class SetFlightFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = adapter.getItem(position);
-                if (name.equals("Harrison Cheng")) {
+                if (false) {
                     Toast.makeText(getActivity(), "Go use the other app...", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mSearchBar.getWindowToken(), 0);
                     EventsLab.get(getActivity()).setStudentName(name);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
+                    EventsLab.get(getActivity()).setTrueFalse();
                     if (fm.getBackStackEntryCount() > 0)
                         fm.popBackStack();
                     else
@@ -86,6 +92,7 @@ public class SetFlightFragment extends Fragment {
         return v;
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
