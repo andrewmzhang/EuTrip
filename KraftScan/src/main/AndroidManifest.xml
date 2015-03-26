@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/launcher_ic"
+        android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".EventListActivity"

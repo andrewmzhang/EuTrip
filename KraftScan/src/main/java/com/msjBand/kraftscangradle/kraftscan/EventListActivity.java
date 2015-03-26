@@ -157,7 +157,12 @@ public class EventListActivity extends ActionBarActivity {
                     mDrawerList.setItemChecked(position, true);
                 }
 
+                Fragment fragment1 = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                if (fragment1 instanceof EventListFragment){
+                    fragment1 = (EventListFragment) fragment1;
+                    ((EventListFragment) fragment1).sendFilters();
 
+                }
 
 
             }

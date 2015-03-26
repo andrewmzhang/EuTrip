@@ -73,7 +73,7 @@ public class EventListFragment extends ListFragment {
 
         setListAdapter(adapter);
 
-
+/*
 
         mHandler = new Handler();
         mUpdate = new Runnable() {
@@ -84,7 +84,7 @@ public class EventListFragment extends ListFragment {
                 mHandler.postDelayed(this, 2000);
             }
         };
-        mHandler.postDelayed(mUpdate, 0);
+        mHandler.postDelayed(mUpdate, 0); */
 
     }
 
