@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.UUID;
+
 public class EventFragment extends Fragment {
 
     public static final String EVENT_ID =
@@ -35,10 +37,10 @@ public class EventFragment extends Fragment {
     private String mTimeString;
     private TextView mMyFlight;
 
-    public static EventFragment newInstance(int id) {
+    public static EventFragment newInstance(UUID id) {
 
         Bundle args = new Bundle();
-        args.putInt(EVENT_ID, id);
+        args.putSerializable(EVENT_ID, id);
 
         EventFragment fragment = new EventFragment();
         fragment.setArguments(args);
@@ -51,9 +53,11 @@ public class EventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int id = getArguments().getInt(EVENT_ID);
+        UUID id = (UUID) getArguments().getSerializable(EVENT_ID);
+
 
         mEvent = EventsLab.get(getActivity()).getEvent(id);
+
         setHasOptionsMenu(true);
 
 

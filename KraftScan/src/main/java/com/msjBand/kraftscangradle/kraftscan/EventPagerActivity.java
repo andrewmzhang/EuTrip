@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class EventPagerActivity extends ActionBarActivity {
 
@@ -27,11 +28,13 @@ public class EventPagerActivity extends ActionBarActivity {
 
         mEvents = EventsLab.get(this).getEvents();
 
+
         FragmentManager fm = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
-                return EventFragment.newInstance(position);
+                Event event = mEvents.get(position);
+                return EventFragment.newInstance(event.getId());
             }
 
             @Override
@@ -51,6 +54,8 @@ public class EventPagerActivity extends ActionBarActivity {
                 Event event = mEvents.get(position);
                 if (event.getTitle() != null) {
                     setTitle(event.getTitle());
+                } else {
+                    setTitle("Null");
                 }
             }
 
@@ -60,9 +65,15 @@ public class EventPagerActivity extends ActionBarActivity {
             }
         });
 
-        int id = getIntent().getIntExtra(EventFragment.EVENT_ID,0);
-        System.out.println(id);
-        mViewPager.setCurrentItem(id);
+        UUID id = (UUID) getIntent().getSerializableExtra(EventFragment.EVENT_ID);
+        for (int i = 0; i < mEvents.size(); i++) {
+            if (mEvents.get(i).getId().equals(id)) {
+                mViewPager.setCurrentItem(i);
+                setTitle(mEvents.get(i).getTitle());
+                break;
+            }
+
+        }
 
 
     }

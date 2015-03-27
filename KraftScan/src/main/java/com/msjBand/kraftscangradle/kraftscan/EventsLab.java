@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 import java.util.TimeZone;
+import java.util.UUID;
 
 
 //"\n\n\t On your arrival in to Paris, after clearing immigration and customs, you will be men in the arrivals area by your tour assistant and taken on a guided" +
@@ -564,12 +565,14 @@ public class EventsLab {
         e.setTitle("Flight 41 Leaves Hotel");
         e.setNotes("\t Flight 41 departures depart from the hotel.");
         e.setDrawableId(R.drawable.morn);
+        e.setIsFlight(true);
         mEvents.add(e);
 
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 7, 45, 0);
         e.setTitle("Flight 49 Leaves Hotel");
         e.setNotes("\t Flight 49 departures depart from the hotel.");
         e.setDrawableId(R.drawable.morn);
+        e.setIsFlight(true);
         mEvents.add(e);
 
         e = new Event(TimeZone.getTimeZone(sParisZone), 2015, 4, 7, 10, 0, 0);
@@ -760,6 +763,16 @@ public class EventsLab {
         }
 
         return sEventsLab;
+
+    }
+
+    public Event getEvent(UUID id) {
+
+        for (Event e: mMasterEvents) {
+            if (e.getId().equals(id))
+                return e;
+        }
+        return null;
 
     }
 
