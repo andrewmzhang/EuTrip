@@ -67,12 +67,6 @@ public class EventListActivity extends ActionBarActivity {
             }
 
 
-            if (position == 2) {
-                main.setText("Disable Notifications");
-                checkBox.setClickable(false);
-                checkBox.setChecked(lab.isDisableAllAlarms());
-
-            }
 
 
 
@@ -113,7 +107,6 @@ public class EventListActivity extends ActionBarActivity {
         mSettings = new ArrayList<String>();
         mSettings.add("1");
         mSettings.add("2");
-        mSettings.add("3");
 
 
         adapter = new DrawerAdapter(mSettings);
@@ -151,11 +144,6 @@ public class EventListActivity extends ActionBarActivity {
                     }
                 }
 
-                if (position == 2) {
-                    EventsLab.get(getApplicationContext()).setDisableAllAlarms(!EventsLab.get(getApplicationContext()).isDisableAllAlarms());
-                    adapter.notifyDataSetChanged();
-                    mDrawerList.setItemChecked(position, true);
-                }
 
                 Fragment fragment1 = getSupportFragmentManager().findFragmentById(R.id.content_frame);
                 if (fragment1 instanceof EventListFragment){

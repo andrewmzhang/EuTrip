@@ -41,6 +41,9 @@ public class EventListFragment extends ListFragment {
     private int Saturday;
     private int Sunday;
 
+    private int index;
+    private int top;
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
@@ -52,6 +55,20 @@ public class EventListFragment extends ListFragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventsLab.get(getActivity()).saveCrimes(EventsLab.get(getActivity()));
+
+        super.onPause();
+        try {
+            index = this.getListView().getFirstVisiblePosition();
+            View v = this.getListView().getChildAt(0);
+            top = (v == null) ? 0 : v.getTop();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -62,7 +79,7 @@ public class EventListFragment extends ListFragment {
 
         setRandomColours(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
         mEvents = new ArrayList<Event>();
-
+        setRetainInstance(true);
 
         mEvents.addAll(EventsLab.get(getActivity()).getEvents());
         //getListView().setDivider(null);
@@ -111,6 +128,10 @@ public class EventListFragment extends ListFragment {
         super.onResume();
         sendFilters();
         adapter.notifyDataSetChanged();
+
+        if (index != -1) {
+            this.getListView().setSelectionFromTop(index, top);
+        }
     }
 
 
@@ -205,6 +226,19 @@ public class EventListFragment extends ListFragment {
             Drawable Na = getResources().getDrawable(R.drawable.x);
             ShapeDrawable shape = new ShapeDrawable(new OvalShape());
 
+            int drawableId = e.getDrawableId();
+            int colorID;
+            colorID = getResources().getColor(R.color.blue);
+
+            if (drawableId == R.drawable.airport)
+                colorID = getResources().getColor(R.color.indigo);
+
+            if (drawableId == R.drawable.note)
+                colorID = getResources().getColor(R.color.green);
+
+            if (drawableId == R.drawable.food)
+                colorID = getResources().getColor(R.color.amber);
+
             if ((flightstatus == 1) && (isFlightOne) && (isFlight)){ // items is both flight 1 and person is flight one
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
@@ -231,7 +265,7 @@ public class EventListFragment extends ListFragment {
             } else {
                 Drawable image = getResources().getDrawable(event.getDrawableId());
                 imageView.setImageDrawable(image);
-                shape.getPaint().setColor(getResources().getColor(R.color.blue));
+                shape.getPaint().setColor(colorID);
                 imageView.setBackgroundDrawable(shape);
             }
 

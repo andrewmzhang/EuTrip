@@ -35,6 +35,8 @@ public class SetFlightFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        setRetainInstance(true);
+
         View v = inflater.inflate(R.layout.student_list_searchable, container, false);
         mPeople = new ArrayList<String>();
         mPeople = populatePeople(mPeople);
@@ -159,7 +161,7 @@ public class SetFlightFragment extends Fragment {
         arrayList.add("Rahul Chatwani");
         arrayList.add("Nathon Ma");
         arrayList.add("Amanda Wang");
-        arrayList.add("Tiancheng (TCJ) Cheng");
+        arrayList.add("TCJ Cheng");
         arrayList.add("Kevin Zhu");
         arrayList.add("Kevin Yu");
         arrayList.add("Albert Stanley");

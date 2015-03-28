@@ -22,7 +22,12 @@ public class Event {
     private boolean isFlight;
     private boolean isDepart;
     private int drawableId;
+    private int colorID;
     private boolean isApplicable = true;
+
+    public int getColorID() {
+        return colorID;
+    }
 
     public Boolean isApplicable() {
         return isApplicable;
@@ -57,6 +62,22 @@ public class Event {
 
     public void setDrawableId(int drawableId) {
         this.drawableId = drawableId;
+        if (drawableId == R.drawable.airport)
+            colorID = R.color.indigo;
+        if (drawableId == R.drawable.night)
+            colorID = R.color.deepPurple;
+        if (drawableId == R.drawable.morn)
+            colorID = R.color.orange;
+        if (drawableId == R.drawable.noon)
+            colorID = R.color.yellow;
+        if (drawableId == R.drawable.sunset)
+            colorID = R.color.deepOrange;
+        if (drawableId == R.drawable.food)
+            colorID = R.color.orange;
+        if (drawableId == R.drawable.dinner_secondary)
+            colorID = R.color.deepPurple;
+        else
+            colorID = R.color.cyan;
     }
 
     public boolean determineIsOccured() {
@@ -109,7 +130,7 @@ public class Event {
     public String getDayOfWeek() {
         fmt = new SimpleDateFormat("ccccc");
         fmt.setTimeZone(mTimeZone);
-        return fmt.format(mDate.getTime());
+        return fmt.format(mDate.getTime()).substring(0, 1);
     }
 
 
@@ -165,13 +186,6 @@ public class Event {
         return fmt.format(mDate.getTime());
     }
 
-    public String getAddress() {
-        return mAddress;
-    }
-
-    public void setAddress(String address) {
-        mAddress = address;
-    }
 
     public String getNotes() {
         return mNotes;
