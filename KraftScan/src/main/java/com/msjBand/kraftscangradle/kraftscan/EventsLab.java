@@ -24,7 +24,7 @@ public class EventsLab {
     private int mFlightOne = -1;   //-1 is unknown, 0 is not on Flight One (2283), 1 is on Flight One
 
 
-    private boolean disableAllAlarms;
+    private boolean disableAllAlarms = false;
 
 
     private static EventsLab sEventsLab;
@@ -62,6 +62,10 @@ public class EventsLab {
 
         return json;
 
+    }
+
+    public void setDisableAllAlarms(boolean disableAllAlarms) {
+        this.disableAllAlarms = disableAllAlarms;
     }
 
     private EventsLab(Context appContext) {
@@ -1003,6 +1007,7 @@ public class EventsLab {
         return mMasterEvents.get(position);
 
     }
+
 
     public ArrayList<Event> getEvents() {return mMasterEvents;}
 

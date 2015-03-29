@@ -66,6 +66,12 @@ public class EventListActivity extends ActionBarActivity {
                 checkBox.setChecked(EventsLab.get(getApplicationContext()).isRemoveIrrelevant());
             }
 
+            if (position == 2) {
+                main.setText("Disable Notifications");
+                checkBox.setClickable(false);
+                checkBox.setChecked(EventsLab.get(getApplicationContext()).isDisableAllAlarms());
+
+            }
 
 
 
@@ -90,6 +96,7 @@ public class EventListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_list);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -107,6 +114,7 @@ public class EventListActivity extends ActionBarActivity {
         mSettings = new ArrayList<String>();
         mSettings.add("1");
         mSettings.add("2");
+        mSettings.add("3");
 
 
         adapter = new DrawerAdapter(mSettings);
@@ -142,6 +150,18 @@ public class EventListActivity extends ActionBarActivity {
                         Toast toast = Toast.makeText(getApplicationContext(), "Name Must Be Set!", Toast.LENGTH_SHORT);
                         toast.show();
                     }
+                }
+
+                if (position == 2) {
+                    EventsLab.get(getApplicationContext()).setDisableAllAlarms(!EventsLab.get(getApplicationContext()).isDisableAllAlarms());
+                    mDrawerList.setItemChecked(position, true);
+                    if (!EventsLab.get(getApplicationContext()).isDisableAllAlarms()) {
+                        NotifServicer.setServiceAlarm(getApplicationContext(), true);
+
+                    } else {
+                        NotifServicer.setServiceAlarm(getApplicationContext(), false);
+                    }
+
                 }
 
 

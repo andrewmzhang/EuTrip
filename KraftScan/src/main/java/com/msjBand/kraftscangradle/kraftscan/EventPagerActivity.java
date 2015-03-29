@@ -26,6 +26,7 @@ public class EventPagerActivity extends ActionBarActivity {
         mViewPager.setId(R.id.viewPager);
         setContentView(mViewPager);
 
+
         mEvents = EventsLab.get(this).getEvents();
 
 

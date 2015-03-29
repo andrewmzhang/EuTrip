@@ -81,6 +81,7 @@ public class EventListFragment extends ListFragment {
         mEvents = new ArrayList<Event>();
         setRetainInstance(true);
 
+
         mEvents.addAll(EventsLab.get(getActivity()).getEvents());
         //getListView().setDivider(null);
 
@@ -201,6 +202,7 @@ public class EventListFragment extends ListFragment {
         public void setCount(ArrayList<Event> Events) {
             count  = Events.size();
         }
+
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

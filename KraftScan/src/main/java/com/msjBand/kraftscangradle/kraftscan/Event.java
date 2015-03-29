@@ -81,7 +81,16 @@ public class Event {
     }
 
     public boolean determineIsOccured() {
-        return false;
+        Calendar now = Calendar.getInstance();
+        long end = mDate.getTimeInMillis();
+        long start = now.getTimeInMillis();
+        long interval = end - start;
+
+        if (interval < 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isDepart() {
@@ -127,12 +136,52 @@ public class Event {
 
     }
 
+    public GregorianCalendar getDate() {
+
+        return mDate;
+    }
+
     public String getDayOfWeek() {
         fmt = new SimpleDateFormat("ccccc");
         fmt.setTimeZone(mTimeZone);
         return fmt.format(mDate.getTime()).substring(0, 1);
     }
 
+    public String notifTime() {
+        Calendar now = Calendar.getInstance();
+        long end = mDate.getTimeInMillis();
+        long start = now.getTimeInMillis();
+        long interval = end - start;
+
+        if (interval < 0) {
+            setOccurred(true);
+            return "Passed";
+        }
+        String dayText = "";
+        String hourText = "";
+        String minText = "";
+        String secText = "";
+
+        int day = (int) (interval / (1000 * 60 * 60 * 24));
+        int hours = (int) (interval / (1000 * 60 * 60)) - (day * 24);
+        int minutes = (int) (interval / (1000 * 60)) - (day * 24 * 60) - (hours * 60);
+        int seconds = (int) (interval / (1000)) - (day * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+        if (day != 0) {
+            dayText = day + "d ";
+        }
+        if (hours != 0) {
+            hourText = hours + "h ";
+        }
+        if (minutes != 0) {
+            minText = minutes + "m ";
+        }
+        secText = seconds + "s";
+        if (seconds < 10) {
+            secText = "0" + secText;
+        }
+
+        return (dayText + hourText + minText);
+    }
 
 
     public String getGMT() {
