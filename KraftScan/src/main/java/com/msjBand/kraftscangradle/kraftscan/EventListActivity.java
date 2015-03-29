@@ -1,6 +1,7 @@
 package com.msjBand.kraftscangradle.kraftscan;
 
 
+import android.app.ListFragment;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -73,6 +74,13 @@ public class EventListActivity extends ActionBarActivity {
 
             }
 
+            if (position == 3) {
+                main.setText("AutoScroll");
+                checkBox.setClickable(false);
+                checkBox.setChecked(EventsLab.get(getApplicationContext()).isAutoScroll());
+
+            }
+
 
 
 
@@ -103,6 +111,16 @@ public class EventListActivity extends ActionBarActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.content_frame);
+        if (!EventsLab.get(getApplicationContext()).isDisableAllAlarms()) {
+            NotifServicer.setServiceAlarm(getApplicationContext(), true);
+            System.out.println("Systems True");
+
+
+        } else {
+            NotifServicer.setServiceAlarm(getApplicationContext(), false);
+            System.out.println("Systems Out");
+        }
+
 
         if (fragment == null) {
             fragment = new EventListFragment();
@@ -115,9 +133,11 @@ public class EventListActivity extends ActionBarActivity {
         mSettings.add("1");
         mSettings.add("2");
         mSettings.add("3");
+        mSettings.add("4");
 
 
         adapter = new DrawerAdapter(mSettings);
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primary_dark));
@@ -157,9 +177,26 @@ public class EventListActivity extends ActionBarActivity {
                     mDrawerList.setItemChecked(position, true);
                     if (!EventsLab.get(getApplicationContext()).isDisableAllAlarms()) {
                         NotifServicer.setServiceAlarm(getApplicationContext(), true);
+                        System.out.println("Systems Tru 2");
 
                     } else {
                         NotifServicer.setServiceAlarm(getApplicationContext(), false);
+                        System.out.println("Systems Out 2");
+
+                    }
+
+                }
+
+                if (position == 3) {
+                    EventsLab.get(getApplicationContext()).setAutoScroll(!EventsLab.get(getApplicationContext()).isAutoScroll());
+                    mDrawerList.setItemChecked(position, true);
+                    if (EventsLab.get(getApplicationContext()).isAutoScroll()) {
+                        Fragment listFragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                        if (listFragment instanceof EventListFragment)
+                            ((EventListFragment) listFragment).autoScroll();
+
+                    } else {
+                        EventsLab.get(getApplicationContext()).setLastAutoScrollId(0);
                     }
 
                 }

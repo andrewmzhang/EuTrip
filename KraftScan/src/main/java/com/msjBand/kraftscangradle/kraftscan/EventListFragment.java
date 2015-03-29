@@ -9,6 +9,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,18 +94,7 @@ public class EventListFragment extends ListFragment {
 
         setListAdapter(adapter);
 
-/*
 
-        mHandler = new Handler();
-        mUpdate = new Runnable() {
-            @Override
-            public void run() {
-
-                sendFilters();
-                mHandler.postDelayed(this, 2000);
-            }
-        };
-        mHandler.postDelayed(mUpdate, 0); */
 
     }
 
@@ -130,11 +120,39 @@ public class EventListFragment extends ListFragment {
         sendFilters();
         adapter.notifyDataSetChanged();
 
-        if (index != -1) {
-            this.getListView().setSelectionFromTop(index, top);
-        }
+        autoScroll();
+
     }
 
+    public void autoScroll() {
+        getListView().post(new Runnable() {
+            @Override
+            public void run() {
+                if (EventsLab.get(getActivity()).isAutoScroll()) {
+                    int position = EventsLab.get(getActivity()).getCurrentCrimePosition(mEvents);
+                    if (position >= 0)
+                        getListView().smoothScrollToPositionFromTop(position, 0, 500);
+
+                }
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+
+    }
 
     private void setRandomColours(int mon, int tues, int wed, int thurs, int fri, int sat, int sun) {
         ArrayList<Integer> colors = new ArrayList<Integer>();
@@ -192,6 +210,11 @@ public class EventListFragment extends ListFragment {
             mItems = Events;
             count = mItems.size();
 
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
         }
 
         @Override

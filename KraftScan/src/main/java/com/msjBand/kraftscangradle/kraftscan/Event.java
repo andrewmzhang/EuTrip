@@ -81,15 +81,15 @@ public class Event {
     }
 
     public boolean determineIsOccured() {
-        Calendar now = Calendar.getInstance();
+        Calendar now = GregorianCalendar.getInstance();
         long end = mDate.getTimeInMillis();
         long start = now.getTimeInMillis();
         long interval = end - start;
 
-        if (interval < 0) {
-            return true;
-        } else {
+        if (now.before(this.getDate())) {
             return false;
+        } else {
+            return true;
         }
     }
 

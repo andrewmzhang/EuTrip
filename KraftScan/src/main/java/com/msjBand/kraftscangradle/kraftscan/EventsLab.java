@@ -22,7 +22,8 @@ public class EventsLab {
     private boolean removeIrrelevant;
     private String studentName;
     private int mFlightOne = -1;   //-1 is unknown, 0 is not on Flight One (2283), 1 is on Flight One
-
+    private boolean mAutoScroll = false;
+    private int mLastAutoScrollId = 0;
 
     private boolean disableAllAlarms = false;
 
@@ -51,7 +52,8 @@ public class EventsLab {
     private static final String JSON_Remove_Relevant = "id";
     private static final String JSON_StudentName = "title";
     private static final String JSON_mFlightOne = "solved";
-    private static final String JSON_User_Set = "set";
+    private static final String JSON_AutoScroll = "set";
+    private static final String JSON_lastScrollId = "scrollid";
 
     public JSONObject toJSON() throws JSONException {
 
@@ -59,9 +61,19 @@ public class EventsLab {
         json.put(JSON_Remove_Relevant, removeIrrelevant);
         json.put(JSON_StudentName, studentName);
         json.put(JSON_mFlightOne, mFlightOne);
+        json.put(JSON_AutoScroll, mAutoScroll);
+        json.put(JSON_lastScrollId, mLastAutoScrollId);
 
         return json;
 
+    }
+
+    public int getLastAutoScrollId() {
+        return mLastAutoScrollId;
+    }
+
+    public void setLastAutoScrollId(int lastAutoScrollId) {
+        mLastAutoScrollId = lastAutoScrollId;
     }
 
     public void setDisableAllAlarms(boolean disableAllAlarms) {
@@ -86,6 +98,28 @@ public class EventsLab {
 
     }
 
+    public int getCurrentCrimePosition(ArrayList<Event> eventsList) {
+
+        for (int i = 0; i < eventsList.size(); i++) {
+            if (eventsList.get(i).determineIsOccured() == false) {
+                Log.d(TAG, "Event Position" + i);
+                if (mLastAutoScrollId != i) {
+                    mLastAutoScrollId = i;
+                    return i;
+
+                } else {
+                    break;
+                }
+
+            }
+
+        }
+
+        return -1;
+
+
+    }
+
     public boolean saveCrimes(EventsLab eventsLab) {
         try {
             mSerializer.saveCrimes(eventsLab);
@@ -103,8 +137,18 @@ public class EventsLab {
         this.setStudentName(jsonObject.getString(JSON_StudentName));
         this.setTrueFalse();
         mFlightOne = jsonObject.getInt(JSON_mFlightOne);
+        mAutoScroll = jsonObject.getBoolean(JSON_AutoScroll);
+        mLastAutoScrollId = jsonObject.getInt(JSON_lastScrollId);
 
 
+    }
+
+    public boolean isAutoScroll() {
+        return mAutoScroll;
+    }
+
+    public void setAutoScroll(boolean autoScroll) {
+        mAutoScroll = autoScroll;
     }
 
     private String Flight2283Roster = "Monica Kraft\nWenhan Fang\nSathvik Vivek\nYu-Cheng Chou\nYu-Ting Chou\nJemmy Zhou\nRaymong Yin\nJianXiang Liu\nNikhil Pathania\nAllison Xu\nCharles Xu\nSharleen Zhou" +
