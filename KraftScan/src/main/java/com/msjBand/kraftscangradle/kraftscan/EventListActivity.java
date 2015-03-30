@@ -111,6 +111,7 @@ public class EventListActivity extends ActionBarActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.content_frame);
+
         if (!EventsLab.get(getApplicationContext()).isDisableAllAlarms()) {
             NotifServicer.setServiceAlarm(getApplicationContext(), true);
             System.out.println("Systems True");

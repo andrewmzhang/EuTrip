@@ -6,21 +6,18 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.amulyakhare.textdrawable.TextDrawable;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 
 public class EventListFragment extends ListFragment {
@@ -52,6 +49,7 @@ public class EventListFragment extends ListFragment {
 
         Intent i = new Intent(getActivity(), EventPagerActivity.class);
         i.putExtra(EventFragment.EVENT_ID, e.getId());
+        Log.d("TAG", e.getId().toString());
         startActivity(i);
 
     }
@@ -331,7 +329,7 @@ public class EventListFragment extends ListFragment {
                     ArrayList<Event> events = new ArrayList<Event>();
 
                     for (Event e : mEvents) {
-                        if (e.isApplicable()) {
+                        if (e.isApplicable(EventsLab.get(getActivity()).getFlightOne())) {
                             events.add(e);
                         }
                     }

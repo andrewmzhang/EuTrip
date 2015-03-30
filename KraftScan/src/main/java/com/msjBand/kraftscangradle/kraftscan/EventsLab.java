@@ -2,7 +2,6 @@ package com.msjBand.kraftscangradle.kraftscan;
 
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,14 +18,17 @@ import java.util.UUID;
 public class EventsLab {
 
     // Settings Data
-    private boolean removeIrrelevant;
-    private String studentName;
+    private boolean removeIrrelevant = false;
+    private String studentName = "";
     private int mFlightOne = -1;   //-1 is unknown, 0 is not on Flight One (2283), 1 is on Flight One
     private boolean mAutoScroll = false;
     private int mLastAutoScrollId = 0;
 
+
     private boolean disableAllAlarms = false;
 
+
+    private UUID mIntentUUID;
 
     private static EventsLab sEventsLab;
     private Context mAppContext;
@@ -66,6 +68,14 @@ public class EventsLab {
 
         return json;
 
+    }
+
+    public UUID getIntentUUID() {
+        return mIntentUUID;
+    }
+
+    public void setIntentUUID(UUID intentUUID) {
+        mIntentUUID = intentUUID;
     }
 
     public int getLastAutoScrollId() {
@@ -177,10 +187,20 @@ public class EventsLab {
 
         ArrayList<Event> mEvents = new ArrayList<Event>();
 
-        Event e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 0, 0);
-        e.setTitle("Airport SFO");
+        Event e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 4, 45, 0);
+        e.setTitle("Airport SFO 2411");
         e.setNotes("\t Arrive at SFO American Airlines Domestic Departures Terminal 2");
         e.setDrawableId(R.drawable.airport);
+        e.setIsFlightOne(false);
+        e.setIsFlight(true);
+        mEvents.add(e);
+
+        e = new Event(TimeZone.getTimeZone("America/Los_Angeles"), 2015, 3, 30, 5, 15, 0);
+        e.setTitle("Airport SFO 2283");
+        e.setNotes("\t Arrive at SFO American Airlines Domestic Departures Terminal 2");
+        e.setDrawableId(R.drawable.airport);
+        e.setIsFlightOne(true);
+        e.setIsFlight(true);
         mEvents.add(e);
 
         // 2411 -Harrison
@@ -242,7 +262,7 @@ public class EventsLab {
         // Touchdown of Flight 2411
         e = new Event((TimeZone.getTimeZone("America/Chicago")), 2015, 3, 30, 14, 07, 0);
         e.setTitle("Flight 2411 Arrival");
-        e.setNotes("Flight Duration: 4h 22min \n\n\tTouchdown at Chicago O'Hare Airport. According to Google reviews, this airport is notorious for delaying flights, and rates a 3.6/5... \n\n\t Don't forget" +
+        e.setNotes("Flight Duration: 4h 22min \n\n\tTouchdown at Chicago O'Hare Airport. According to Google reviews, this airport_level is notorious for delaying flights, and rates a 3.6/5... \n\n\t Don't forget" +
                 " to transfer flights in 1 hour (15:10)\n" +
                 "\n" +
                 "Contact: Harrison Cheng\n" +
@@ -1006,7 +1026,7 @@ public class EventsLab {
 
     public Event getEvent(UUID id) {
 
-        for (Event e: mMasterEvents) {
+        for (Event e : getEvents()) {
             if (e.getId().equals(id))
                 return e;
         }
@@ -1021,7 +1041,7 @@ public class EventsLab {
 
     public String getStudentName() {
 
-        if (studentName == null)
+        if ((studentName == null) || (studentName.equals("")))
             return "Set Name";
         return "Reset: " + studentName;
     }

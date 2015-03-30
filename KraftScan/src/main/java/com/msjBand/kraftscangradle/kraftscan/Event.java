@@ -29,8 +29,22 @@ public class Event {
         return colorID;
     }
 
-    public Boolean isApplicable() {
-        return isApplicable;
+    public Boolean isApplicable(int flightstatus) {
+        boolean isFlightOne = getIsFlightOne();
+
+        if ((flightstatus == 1) && (isFlightOne) && (isFlight)) { // items is both flight 1 and person is flight one
+            return true;
+        } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
+            return true;
+        } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
+            return false;
+        } else if ((flightstatus == 0) && (isFlightOne) && (isFlight)) { // items is flight one, but person not flying flight one
+            return false;
+        } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
+            return true;
+        } else {
+            return true;
+        }
     }
 
     public void setIsApplicable(Boolean isApplicable) {

@@ -58,7 +58,6 @@ public class EventFragment extends Fragment {
 
         mEvent = EventsLab.get(getActivity()).getEvent(id);
 
-        setHasOptionsMenu(true);
 
 
 
