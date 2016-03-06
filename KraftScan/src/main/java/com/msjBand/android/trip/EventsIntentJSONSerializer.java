@@ -1,10 +1,8 @@
-package com.msjBand.kraftscangradle.kraftscan;
+package com.msjBand.android.trip;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;

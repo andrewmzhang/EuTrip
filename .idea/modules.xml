@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EuTrip.iml" filepath="$PROJECT_DIR$/EuTrip.iml" />
-      <module fileurl="file://$PROJECT_DIR$/KraftScan/KraftScan.iml" filepath="$PROJECT_DIR$/KraftScan/KraftScan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/KraftScanGradle.iml" filepath="$PROJECT_DIR$/KraftScanGradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KraftScan/KraftScan.iml" filepath="$PROJECT_DIR$/.idea/modules/KraftScan/KraftScan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KraftScanGradle.iml" filepath="$PROJECT_DIR$/.idea/modules/KraftScanGradle.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,5 @@
-package com.msjBand.kraftscangradle.kraftscan;
+package com.msjBand.android.trip;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;

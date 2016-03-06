@@ -1,4 +1,4 @@
-package com.msjBand.kraftscangradle.kraftscan;
+package com.msjBand.android.trip;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 

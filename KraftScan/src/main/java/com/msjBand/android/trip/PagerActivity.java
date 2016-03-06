@@ -1,4 +1,4 @@
-package com.msjBand.kraftscangradle.kraftscan;
+package com.msjBand.android.trip;
 
 
 import android.support.v4.view.ViewPager;

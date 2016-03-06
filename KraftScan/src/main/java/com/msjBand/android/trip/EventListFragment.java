@@ -1,4 +1,4 @@
-package com.msjBand.kraftscangradle.kraftscan;
+package com.msjBand.android.trip;
 
 import android.content.Intent;
 import android.content.res.Resources;
