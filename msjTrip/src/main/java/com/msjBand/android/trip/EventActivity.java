@@ -14,9 +14,9 @@ public class EventActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        UUID id = EventsLab.get(getApplicationContext()).getIntentUUID();
+        UUID id = oldEventsLab.get(getApplicationContext()).getIntentUUID();
         Log.d("TAG", "UUID recieved by EventActivity " + id);
-        getSupportActionBar().setTitle(EventsLab.get(getApplicationContext()).getEvent(id).getTitle());
+        getSupportActionBar().setTitle(oldEventsLab.get(getApplicationContext()).getEvent(id).getTitle());
 
         return EventFragment.newInstance(id);
     }
@@ -24,9 +24,9 @@ public class EventActivity extends SingleFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        UUID id = EventsLab.get(getApplicationContext()).getIntentUUID();
+        UUID id = oldEventsLab.get(getApplicationContext()).getIntentUUID();
 
-        getSupportActionBar().setTitle(EventsLab.get(getApplicationContext()).getEvent(id).getTitle());
+        getSupportActionBar().setTitle(oldEventsLab.get(getApplicationContext()).getEvent(id).getTitle());
 
     }
 }

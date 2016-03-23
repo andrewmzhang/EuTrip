@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class PagerActivity extends ActionBarActivity{
 
     ViewPager mViewPager;
-    ArrayList<Event> mEvents;
+    ArrayList<oldEvent> mOldEvents;
 
 
 

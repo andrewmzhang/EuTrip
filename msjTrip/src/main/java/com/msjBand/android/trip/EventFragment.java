@@ -21,7 +21,7 @@ public class EventFragment extends Fragment {
             "com.msjBand.kraftscangradle.kraftscan";
     public static final String EVENT_FLIGHT_TYPE =
             "com.msjBand.kraftscangradle.flighttype";
-    private Event mEvent;
+    private oldEvent mOldEvent;
     private TextView mTitleText;
     private TextView mETAText;
     private TextView mTimeZoneText;
@@ -54,7 +54,7 @@ public class EventFragment extends Fragment {
         UUID id = (UUID) getArguments().getSerializable(EVENT_ID);
 
 
-        mEvent = EventsLab.get(getActivity()).getEvent(id);
+        mOldEvent = oldEventsLab.get(getActivity()).getEvent(id);
 
 
 
@@ -91,7 +91,7 @@ public class EventFragment extends Fragment {
         mUpdate = new Runnable() {
             @Override
             public void run() {
-                String text = mEvent.getETA();
+                String text = mOldEvent.getETA();
                 mETAText.setText(text);
                 mHandler.postDelayed(this, 1000);
             }
@@ -102,20 +102,20 @@ public class EventFragment extends Fragment {
         mDateLabel = (TextView) v.findViewById(R.id.event_fragment_date_label);
 
         mTimeZoneText = (TextView) v.findViewById(R.id.event_fragment_timezone);
-        mTimeString = mEvent.getTimeZone();
+        mTimeString = mOldEvent.getTimeZone();
         mTimeZoneText.setText( "(" + mTimeString + ")");
 
         mTimeText = (TextView) v.findViewById(R.id.time_text);
-        mTimeText.setText("   " + mEvent.getLocalTime());
+        mTimeText.setText("   " + mOldEvent.getLocalTime());
 
         mDateText = (TextView) v.findViewById(R.id.date_text);
-        mDateText.setText(mEvent.getLocalDate());
+        mDateText.setText(mOldEvent.getLocalDate());
 
         mMyFlight = (TextView) v.findViewById(R.id.event_fragment_flight);
         updateTextView();
 
         mDescription = (TextView) v.findViewById(R.id.fragment_event_description);
-        mDescription.setText(mEvent.getNotes());
+        mDescription.setText(mOldEvent.getNotes());
 
 
 
@@ -125,8 +125,8 @@ public class EventFragment extends Fragment {
     }
 
     private void updateTextView() {
-        if (mEvent.getIsFlight()) {
-            EventsLab lab = EventsLab.get(getActivity());
+        if (mOldEvent.getIsFlight()) {
+            oldEventsLab lab = oldEventsLab.get(getActivity());
 
             if (lab.getFlightOne() == -1) { // flight status unknown, ask for search
                 mMyFlight.setText(R.string.flight_status_unsure);
@@ -134,16 +134,16 @@ public class EventFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getActivity(), StudentListActivity.class);
-                        i.putExtra(EventFragment.EVENT_FLIGHT_TYPE, mEvent.getIsFlightOne());
+                        i.putExtra(EventFragment.EVENT_FLIGHT_TYPE, mOldEvent.getIsFlightOne());
                         startActivity(i);
                     }
                 });
             }
-            else if ( ((lab.getFlightOne() == 1) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 0) && (!mEvent.getIsFlightOne())) ) {  // if person is on flight one, and we are displaying fligh one
+            else if ( ((lab.getFlightOne() == 1) && (mOldEvent.getIsFlightOne())) || ((lab.getFlightOne() == 0) && (!mOldEvent.getIsFlightOne())) ) {  // if person is on flight one, and we are displaying fligh one
                 mMyFlight.setText(R.string.flight_status_confirmed);
                 mMyFlight.setBackgroundColor(Color.parseColor("#1EA71E"));
             }
-            else if ( ((lab.getFlightOne() == 0) && (mEvent.getIsFlightOne())) || ((lab.getFlightOne() == 1) && (!mEvent.getIsFlightOne())) ) {
+            else if ( ((lab.getFlightOne() == 0) && (mOldEvent.getIsFlightOne())) || ((lab.getFlightOne() == 1) && (!mOldEvent.getIsFlightOne())) ) {
                 mMyFlight.setText(R.string.not_your_flight);
                 mMyFlight.setBackgroundColor(Color.parseColor("#ffb41f27"));
             }

@@ -13,7 +13,7 @@ import java.util.UUID;
 public class EventPagerActivity extends ActionBarActivity {
 
     private ViewPager mViewPager;
-    private ArrayList<Event> mEvents;
+    private ArrayList<oldEvent> mOldEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +24,20 @@ public class EventPagerActivity extends ActionBarActivity {
         setContentView(mViewPager);
 
 
-        mEvents = EventsLab.get(this).getEvents();
+        mOldEvents = oldEventsLab.get(this).getEvents();
 
 
         FragmentManager fm = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
-                Event event = mEvents.get(position);
-                return EventFragment.newInstance(event.getId());
+                oldEvent oldEvent = mOldEvents.get(position);
+                return EventFragment.newInstance(oldEvent.getId());
             }
 
             @Override
             public int getCount() {
-                return mEvents.size();
+                return mOldEvents.size();
             }
         });
 
@@ -49,9 +49,9 @@ public class EventPagerActivity extends ActionBarActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Event event = mEvents.get(position);
-                if (event.getTitle() != null) {
-                    setTitle(event.getTitle());
+                oldEvent oldEvent = mOldEvents.get(position);
+                if (oldEvent.getTitle() != null) {
+                    setTitle(oldEvent.getTitle());
                 } else {
                     setTitle("Null");
                 }
@@ -64,10 +64,10 @@ public class EventPagerActivity extends ActionBarActivity {
         });
 
         UUID id = (UUID) getIntent().getSerializableExtra(EventFragment.EVENT_ID);
-        for (int i = 0; i < mEvents.size(); i++) {
-            if (mEvents.get(i).getId().equals(id)) {
+        for (int i = 0; i < mOldEvents.size(); i++) {
+            if (mOldEvents.get(i).getId().equals(id)) {
                 mViewPager.setCurrentItem(i);
-                setTitle(mEvents.get(i).getTitle());
+                setTitle(mOldEvents.get(i).getTitle());
                 break;
             }
 

@@ -18,9 +18,9 @@ public class NotifServicer extends IntentService {
     public static final String ACTION_SHOW_NOTIFICATION =
             "com.bignerdranch.android.photogallery.SHOW_NOTIFICATION";
     private static final String TAG = "NotificationService";
-    private ArrayList<Event> mEvents;
+    private ArrayList<oldEvent> mOldEvents;
     public static final String PREF_IS_ALARM_ON = "isAlarmOn";
-    private Event mEvent;
+    private oldEvent mOldEvent;
 
     private static final int POLL_INTERVAL = 1000 * 30;
 
@@ -65,13 +65,13 @@ public class NotifServicer extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i(TAG, "Received an intent: " + intent);
-        mEvents = EventsLab.get(getApplicationContext()).getEvents();
+        mOldEvents = oldEventsLab.get(getApplicationContext()).getEvents();
 
-        for (int i = 0; i < mEvents.size(); i++) {
-            Event e = mEvents.get(i);
+        for (int i = 0; i < mOldEvents.size(); i++) {
+            oldEvent e = mOldEvents.get(i);
             if (!e.determineIsOccured()) {
-                if (e.isApplicable(EventsLab.get(getApplicationContext()).getFlightOne())) {
-                    mEvent = e;
+                if (e.isApplicable(oldEventsLab.get(getApplicationContext()).getFlightOne())) {
+                    mOldEvent = e;
                     break;
                 }
 
@@ -80,26 +80,26 @@ public class NotifServicer extends IntentService {
 
         Intent i = new Intent(this, EventActivity.class);
 
-        EventsLab.get(getApplicationContext()).setIntentUUID(mEvent.getId());
+        oldEventsLab.get(getApplicationContext()).setIntentUUID(mOldEvent.getId());
 
-        Log.i(TAG, "Stored ID:  " + mEvent.getId());
+        Log.i(TAG, "Stored ID:  " + mOldEvent.getId());
 
         Resources r = getResources();
         PendingIntent pi = PendingIntent
                 .getActivity(this, 0, i, 0);
 
-        int flightstatus = EventsLab.get(getApplicationContext()).getFlightOne();
-        boolean isFlightOne = mEvent.getIsFlightOne();
-        boolean isFlight = mEvent.getIsFlight();
+        int flightstatus = oldEventsLab.get(getApplicationContext()).getFlightOne();
+        boolean isFlightOne = mOldEvent.getIsFlightOne();
+        boolean isFlight = mOldEvent.getIsFlight();
 
         int drawableId;
         int colorID;
 
         if ((flightstatus == 1) && (isFlightOne) && (isFlight)) { // items is both flight 1 and person is flight one
-            drawableId = mEvent.getDrawableId();
+            drawableId = mOldEvent.getDrawableId();
             colorID = (R.color.green);
         } else if ((flightstatus == -1) && (isFlight)) { // items is a flight, but flight status unknown
-            drawableId = mEvent.getDrawableId();
+            drawableId = mOldEvent.getDrawableId();
             colorID = R.color.cyan;
         } else if ((flightstatus == 1) && (!isFlightOne) && (isFlight)) { // items is not flight one, but person is flying one
             drawableId = R.drawable.x;
@@ -109,21 +109,21 @@ public class NotifServicer extends IntentService {
             colorID = R.color.red;
             ;
         } else if ((flightstatus == 0) && (!isFlightOne) && (isFlight)) { // items is not flight one, and person not flying flihg tone
-            drawableId = mEvent.getDrawableId();
+            drawableId = mOldEvent.getDrawableId();
             colorID = (R.color.green);
         } else {
-            drawableId = mEvent.getDrawableId();
-            colorID = mEvent.getColorID();
+            drawableId = mOldEvent.getDrawableId();
+            colorID = mOldEvent.getColorID();
         }
 
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), drawableId);
 
         Notification mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(DrawableIDConvernter(mEvent.getDrawableId()))
-                        .setTicker(mEvent.getTitle())
-                        .setContentTitle(mEvent.getTitle())
-                        .setContentText(mEvent.notifTime())
+                        .setSmallIcon(DrawableIDConvernter(mOldEvent.getDrawableId()))
+                        .setTicker(mOldEvent.getTitle())
+                        .setContentTitle(mOldEvent.getTitle())
+                        .setContentText(mOldEvent.notifTime())
                         .setContentIntent(pi)
                         .setColor(getResources().getColor(colorID))
                         .build();

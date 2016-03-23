@@ -20,8 +20,8 @@ public class EventsIntentJSONSerializer {
 
     }
 
-    public void loadCrimes(EventsLab eventsLab) throws IOException, JSONException {
-        ArrayList<EventsLab> crimes = new ArrayList<EventsLab>();
+    public void loadCrimes(oldEventsLab oldEventsLab) throws IOException, JSONException {
+        ArrayList<oldEventsLab> crimes = new ArrayList<oldEventsLab>();
         BufferedReader reader = null;
         try {
             // Open and read the file into a StringBuilder
@@ -36,7 +36,7 @@ public class EventsIntentJSONSerializer {
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
             // Build the array of crimes from JSONObjects
 
-            eventsLab.setOptions(array.getJSONObject(0));
+            oldEventsLab.setOptions(array.getJSONObject(0));
         } catch (FileNotFoundException e) {
             // Ignore
         } finally {
@@ -47,12 +47,12 @@ public class EventsIntentJSONSerializer {
     }
 
 
-    public void saveCrimes(EventsLab eventsLab) throws JSONException, IOException {
+    public void saveCrimes(oldEventsLab oldEventsLab) throws JSONException, IOException {
 
         // Build an array in JSON
         JSONArray array = new JSONArray();
 
-        array.put(eventsLab.toJSON());
+        array.put(oldEventsLab.toJSON());
         // Write the file to disk
         Writer writer = null;
         try {

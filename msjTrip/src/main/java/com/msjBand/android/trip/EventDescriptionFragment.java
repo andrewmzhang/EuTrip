@@ -13,7 +13,7 @@ public class EventDescriptionFragment extends Fragment {
 
     public static final String EVENT_ID =
             "com.msjBand.kraftscangradle.kraftscan.EventDescriptionFragment.EventID";
-    private Event mEvent;
+    private oldEvent mOldEvent;
     private TextView mDescription;
 
 
@@ -32,7 +32,7 @@ public class EventDescriptionFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         int id = getArguments().getInt(EVENT_ID);
-        mEvent = EventsLab.get(getActivity()).getEvent(id);
+        mOldEvent = oldEventsLab.get(getActivity()).getEvent(id);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EventDescriptionFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_event_description, container, false);
 
         mDescription = (TextView) v.findViewById(R.id.fragment_event_description);
-        mDescription.setText(mEvent.getNotes());
+        mDescription.setText(mOldEvent.getNotes());
 
         return v;
 

@@ -77,9 +77,9 @@ public class SetFlightFragment extends Fragment {
                 } else {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(mSearchBar.getWindowToken(), 0);
-                    EventsLab.get(getActivity()).setStudentName(name);
+                    oldEventsLab.get(getActivity()).setStudentName(name);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    EventsLab.get(getActivity()).setTrueFalse();
+                    oldEventsLab.get(getActivity()).setTrueFalse();
                     if (fm.getBackStackEntryCount() > 0)
                         fm.popBackStack();
                     else

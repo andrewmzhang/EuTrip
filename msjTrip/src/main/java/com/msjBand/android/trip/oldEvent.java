@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class Event {
+public class oldEvent {
 
     private UUID mId;
     private String mTitle;
@@ -51,7 +51,7 @@ public class Event {
         this.isApplicable = isApplicable;
     }
 
-    public Event(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
+    public oldEvent(TimeZone timeZone, int year, int month, int date, int hourOfDay, int minute, int second) {
         isFlight = false;
         misFlightOne = false;
         mTimeZone = timeZone;
