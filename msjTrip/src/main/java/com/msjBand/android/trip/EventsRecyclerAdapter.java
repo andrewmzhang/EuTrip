@@ -12,7 +12,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
 
     private static final String TAG = "EventAdapter";
 
-    private ArrayList<oldEvent> mOldEvents;
+    private ArrayList<Event> mEvents;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTextView;
@@ -27,8 +27,8 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     }
 
 
-    public EventsRecyclerAdapter(ArrayList<oldEvent> oldEvents) {
-        mOldEvents = oldEvents;
+    public EventsRecyclerAdapter(ArrayList<Event> Events) {
+        mEvents = Events;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -39,12 +39,17 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
 
     @Override
     public int getItemCount() {
-        return mOldEvents.size();
+        return mEvents.size();
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getTextView().setText(mOldEvents.get(position).getTitle());
+
+        holder.getTextView().setText(
+                mEvents.
+                        get(position)
+                        .getTitle());
+
     }
 
     /*

@@ -28,6 +28,9 @@ public class EventsRecyclerFragment extends Fragment {
 
 
 
+
+
+
     private EventsRecyclerAdapter adapter;
     private String previousName = "";
 
@@ -45,7 +48,7 @@ public class EventsRecyclerFragment extends Fragment {
 
     private int index;
     private int top;
-    private ArrayList<oldEvent> mOldEvents;
+    private ArrayList<Event> mEvents;
 
 
     private enum LayoutManagerType {
@@ -124,7 +127,7 @@ public class EventsRecyclerFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new EventsRecyclerAdapter(mOldEvents);
+        adapter = new EventsRecyclerAdapter(mEvents);
 
         mRecyclerView.setAdapter(adapter);
 
@@ -140,11 +143,17 @@ public class EventsRecyclerFragment extends Fragment {
         getActivity().setTitle(R.string.event_title);
 
         setRandomColours(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
-        mOldEvents = new ArrayList<oldEvent>();
+
+        mEvents = new ArrayList<Event>();
+
+
         setRetainInstance(true);
 
 
-        mOldEvents.addAll(oldEventsLab.get(getActivity()).getEvents());
+        for(int i = 0; i < 10; i++) {
+            Event e = new Event("This is event #" + i);
+            mEvents.add(e);
+        }
 
     }
 

@@ -13,6 +13,10 @@ public class Event {
     private int groupRelevancy;
 
 
+    public Event(String title) {
+        this.title = title;
+    }
+
     public String getAuthor() {
         return author;
     }
