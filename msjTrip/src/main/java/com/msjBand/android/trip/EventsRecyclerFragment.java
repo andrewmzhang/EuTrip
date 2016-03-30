@@ -9,9 +9,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.gcm.PeriodicTask;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +34,7 @@ public class EventsRecyclerFragment extends Fragment {
 
     private static final String TAG = "EventsRecyclerFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
 
@@ -27,7 +42,8 @@ public class EventsRecyclerFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
 
 
-
+    private VolleySingleton volleySingleton;
+    private RequestQueue requestQueue;
 
 
 
@@ -127,9 +143,14 @@ public class EventsRecyclerFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
+
+
         adapter = new EventsRecyclerAdapter(mEvents);
 
         mRecyclerView.setAdapter(adapter);
+
+
 
         return root;
 
@@ -144,16 +165,37 @@ public class EventsRecyclerFragment extends Fragment {
 
         setRandomColours(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
 
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
         mEvents = new ArrayList<Event>();
 
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, MyApplication.EventsURL, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Toast.makeText(getActivity(), "Successful Capture", Toast.LENGTH_SHORT).show();
+                for(int i = 0; i < response.length(); i++) {
+                    try {
+                        mEvents.add(new Event(response.getJSONObject(i).getString("title")));
+                    } catch (JSONException e) {
+                        mEvents.add(new Event("Failed to Read Previous Event"));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                Log.e("Events Recycler", error.toString());
+            }
+        });
+
+        requestQueue.add(request);
 
         setRetainInstance(true);
 
 
-        for(int i = 0; i < 10; i++) {
-            Event e = new Event("This is event #" + i);
-            mEvents.add(e);
-        }
 
     }
 
