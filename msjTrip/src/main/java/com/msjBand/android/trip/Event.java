@@ -1,5 +1,7 @@
 package com.msjBand.android.trip;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
 public class Event {
@@ -8,12 +10,19 @@ public class Event {
     private String title;
     private String desc;
     private String author;
-    private Date  date;
+    private DateTime date;
     private String timezone;
     private int groupRelevancy;
 
 
-    public Event(String title) {
+
+    public Event(String id, String title, String desc, String author, String date, String timezone, int groupRelevancy) {
+        this.author = author;
+        this.date = DateTime.parse(date);
+        this.desc = desc;
+        this.groupRelevancy = groupRelevancy;
+        this.id = id;
+        this.timezone = timezone;
         this.title = title;
     }
 
@@ -25,11 +34,11 @@ public class Event {
         this.author = author;
     }
 
-    public Date getDate() {
+    public DateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DateTime date) {
         this.date = date;
     }
 

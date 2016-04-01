@@ -1,5 +1,6 @@
 package com.msjBand.android.trip;
 
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "EventAdapter";
 
-    private ArrayList<Event> mEvents;
+    private SortedList<Event> mEvents;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTextView;
@@ -27,8 +30,93 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     }
 
 
-    public EventsRecyclerAdapter(ArrayList<Event> Events) {
-        mEvents = Events;
+    public EventsRecyclerAdapter() {
+        mEvents = new SortedList<Event>(Event.class, new SortedList.Callback<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+
+            @Override
+            public void onInserted(int position, int count) {
+                notifyItemRangeInserted(position, count);
+            }
+
+            @Override
+            public void onRemoved(int position, int count) {
+                notifyItemRangeRemoved(position, count);
+            }
+
+            @Override
+            public void onMoved(int fromPosition, int toPosition) {
+                notifyItemMoved(fromPosition, toPosition);
+            }
+
+            @Override
+            public void onChanged(int position, int count) {
+                notifyItemRangeChanged(position, count);
+            }
+
+            @Override
+            public boolean areContentsTheSame(Event oldItem, Event newItem) {
+                return oldItem.getId().equals(newItem.getId());
+            }
+
+            @Override
+            public boolean areItemsTheSame(Event item1, Event item2) {
+                return item1.getId().equals(item2.getId());
+            }
+        });
+    }
+
+
+
+
+    // region PageList Helpers
+    public Event get(int position) {
+        return mEvents.get(position);
+    }
+
+    public int add(Event item) {
+        return mEvents.add(item);
+    }
+
+    public int indexOf(Event item) {
+        return mEvents.indexOf(item);
+    }
+
+    public void updateItemAt(int index, Event item) {
+        mEvents.updateItemAt(index, item);
+    }
+
+    public void addAll(List<Event> items) {
+        mEvents.beginBatchedUpdates();
+        for (Event item : items) {
+
+            mEvents.add(item);
+        }
+        mEvents.endBatchedUpdates();
+    }
+
+    public void addAll(Event[] items) {
+        addAll(Arrays.asList(items));
+    }
+
+    public boolean remove(Event item) {
+        return mEvents.remove(item);
+    }
+
+    public Event removeItemAt(int index) {
+        return mEvents.removeItemAt(index);
+    }
+
+    public void clear() {
+        mEvents.beginBatchedUpdates();
+        //remove items at end, to avoid unnecessary array shifting
+        while (mEvents.size() > 0) {
+            mEvents.removeItemAt(mEvents.size() - 1);
+        }
+        mEvents.endBatchedUpdates();
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {

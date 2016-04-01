@@ -6,7 +6,7 @@ import android.content.Context;
 public class MyApplication extends Application {
 
     private static MyApplication sInstance;
-    public static final String EventsURL = "http://msj-band-trip.herokuapp.com/exportEvents";
+    public static final String EventsURL = "http://msj-band-trip.herokuapp.com/exportEvents.json";
 
     @Override
     public void onCreate() {
