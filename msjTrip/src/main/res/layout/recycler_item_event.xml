@@ -46,21 +46,15 @@
 
             <TextView
                     android:textColor="@color/secondary_text"
-                    android:id="@+id/item_time_date"
+                    android:id="@+id/event_item_time_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:text="4:30 pm"
+                    android:text="Broken"
                     />
 
         </LinearLayout>
 
-        <ImageView
-                android:id="@+id/day_of_week"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_add"
-                />
 
 
     </LinearLayout>

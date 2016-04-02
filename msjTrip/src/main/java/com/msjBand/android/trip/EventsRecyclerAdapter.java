@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,15 +21,44 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     private SortedList<Event> mEvents;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mTextView;
+        private final TextView mTitleTextView;
+        private final TextView mTimeTextView;
+
 
         public ViewHolder(View v) {
             super(v);
 
-            mTextView = (TextView) v.findViewById(R.id.event_Title);
+            mTitleTextView = (TextView) v.findViewById(R.id.event_Title);
+            mTimeTextView = (TextView) v.findViewById(R.id.event_item_time_date);
         }
 
-        public TextView getTextView() {return mTextView;}
+        public TextView getTitleTextView() {
+            return mTitleTextView;
+        }
+
+        public TextView getTimeTextView() {
+            return mTimeTextView;
+        }
+
+    }
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.getTitleTextView().setText(
+                mEvents.
+                        get(position)
+                        .getTitle()
+        );
+
+        DateTimeZone dtz = DateTimeZone.forID(mEvents.get(position).getTimezone());
+        DateTime dateTime = mEvents.get(position).getDate().toDateTime(dtz);
+
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("h:ma E MMM d z");
+
+        holder.getTimeTextView().setText(dtf.print(dateTime));
+
     }
 
 
@@ -120,7 +152,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_event, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item_event, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -130,15 +162,6 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         return mEvents.size();
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        holder.getTextView().setText(
-                mEvents.
-                        get(position)
-                        .getTitle());
-
-    }
 
     /*
     @Override
