@@ -1,6 +1,8 @@
 package com.msjBand.android.trip.task;
 
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.msjBand.android.trip.callbacks.MasterEventsLoadedListener;
 import com.msjBand.android.trip.extras.EventUtils;
@@ -18,7 +20,6 @@ public class TaskLoadMasterEvents extends AsyncTask<Void, Void, ArrayList<Event>
     private MasterEventsLoadedListener myComponent;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
-    private boolean success;
 
     public TaskLoadMasterEvents(MasterEventsLoadedListener myComponent) {
 
@@ -31,7 +32,7 @@ public class TaskLoadMasterEvents extends AsyncTask<Void, Void, ArrayList<Event>
 
     @Override
     protected ArrayList<Event> doInBackground(Void... params) {
-
+        Log.d("MyService", "On Run task");
         ArrayList<Event> listEvents = EventUtils.loadMasterEvents(requestQueue);
         return listEvents;
     }
@@ -42,6 +43,7 @@ public class TaskLoadMasterEvents extends AsyncTask<Void, Void, ArrayList<Event>
         
         if (myComponent != null) {
             myComponent.onMasterEventsLoaded(listEvents);
+
         }
     }
 

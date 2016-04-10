@@ -6,36 +6,39 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 
-
+import android.util.Log;
 import com.google.android.gms.gcm.GcmNetworkManager;
+import com.google.android.gms.gcm.PeriodicTask;
+import com.google.android.gms.gcm.Task;
 import com.msjBand.android.trip.fragments.EventsRecyclerFragment;
 import com.msjBand.android.trip.R;
+import com.msjBand.android.trip.services.UpdateEventsMasterService;
 
-//import services.MyService;
 
 public class EventsRecyclerActivity extends AppCompatActivity  {
 
     public static final String TAG = "EventsRecyclerActivity";
     private static final String JOB_TAG = "MyServices";
+    private static int hour = 3600;
 
     private GcmNetworkManager mGcmNetworkManager;
 
 
     private void constructJob() {
 
-/*
+
         PeriodicTask task = new PeriodicTask.Builder()
-                .setService(UpdateEventsService.class)
+                .setService(UpdateEventsMasterService.class)
                 .setPersisted(true)
                 .setTag(JOB_TAG)
-                .setPeriod(10)
-                .setFlex(5)
+                .setPeriod((int) (hour * 2))
+                .setFlex((int) (hour * .25))
                 .setRequiredNetwork(Task.NETWORK_STATE_CONNECTED)
                 .setRequiresCharging(false)
                 .build();
 
         mGcmNetworkManager.schedule(task);
-*/
+
     }
 
 

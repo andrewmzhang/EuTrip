@@ -1,6 +1,8 @@
 package com.msjBand.android.trip.fragments;
 
 
+import android.database.ContentObservable;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,7 @@ public class EventsRecyclerFragment extends Fragment implements SwipeRefreshLayo
 
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
+    private EventsMasterObserver mEventsMasterObserver;
 
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -64,6 +68,28 @@ public class EventsRecyclerFragment extends Fragment implements SwipeRefreshLayo
     private int index;
     private int top;
     private ArrayList<Event> mEvents = new ArrayList<>();
+
+    private class EventsMasterObserver extends ContentObserver {
+        public EventsMasterObserver() {
+            super(null);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mEvents.clear();
+                    mEvents = MyApplication.getWritableDatabase().readEvents(DBEvents.EVENTS_MASTER);
+                    adapter.set(mEvents);
+                }
+            });
+
+        }
+    }
+
 
     @Override
     public void onRefresh() {
@@ -101,6 +127,7 @@ public class EventsRecyclerFragment extends Fragment implements SwipeRefreshLayo
             }
         }
 
+        Log.d("MyService", "Updating View");
         if (listEvents != null) {
             adapter.set(listEvents);
         }
@@ -249,12 +276,22 @@ public class EventsRecyclerFragment extends Fragment implements SwipeRefreshLayo
         getActivity().setTitle(R.string.event_title);
 
 
+        mEventsMasterObserver = new EventsMasterObserver();
+        MyApplication.getAppContext().getContentResolver().registerContentObserver(DBEvents.EVENTS_URI, false, mEventsMasterObserver);
+
         setRetainInstance(true);
 
 
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-
+        if (mEventsMasterObserver != null) {
+            MyApplication.getAppContext().getContentResolver().unregisterContentObserver(mEventsMasterObserver);
+            mEventsMasterObserver = null;
+        }
+    }
 }

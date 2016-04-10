@@ -35,11 +35,11 @@ public class Requester {
             try {
                 response = requestFuture.get(30000, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
-                Log.e("Requestor", e + "");
+                Log.e("MyService", e + "");
             } catch (ExecutionException e) {
-                Log.e("Requestor", e + "");
+                Log.e("MyService", e + "");
             } catch (TimeoutException e) {
-                Log.e("Requestor", e + "");
+                Log.e("MyService", e + "");
             }
             return response;
         }

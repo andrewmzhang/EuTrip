@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.net.Uri;
 import android.widget.Toast;
 import com.msjBand.android.trip.extras.MyApplication;
 import com.msjBand.android.trip.pojo.Event;
@@ -25,6 +26,7 @@ public class DBEvents {
     private EventsHelper mHelper;
     private SQLiteDatabase mDatabase;
 
+    public static final Uri EVENTS_URI = Uri.parse("DBEvents://com.msjBand.android.trip");
 
     public DBEvents(Context context) {
 

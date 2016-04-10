@@ -1,5 +1,5 @@
-apply plugin: 'com.android.application'
 
+apply plugin: 'com.android.application'
 
 
 repositories {
@@ -17,7 +17,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
 
     defaultConfig {
@@ -38,9 +38,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.github.delight-im:Android-DDP:+"
     compile "joda-time:joda-time:2.3"
     compile "com.google.android.gms:play-services-gcm:8.4.0"
+
     compile 'com.android.volley:volley:1.0.0'
     compile "com.android.support:support-v4:23.1.0"
     compile "com.android.support:gridlayout-v7:23.1.0"
@@ -71,3 +71,4 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+apply plugin: 'com.google.gms.google-services'

@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-public class Event implements Parcelable {
+public class Event implements Parcelable, Comparable<Event> {
 
     public static final Parcelable.Creator<Event> CREATOR
             = new Parcelable.Creator<Event>() {
@@ -59,6 +59,17 @@ public class Event implements Parcelable {
         timezone = input.readString();
         groupRelevancy = input.readInt();
     }
+
+    public Event(String id, String title, String desc, String author, DateTime date, String timezone, int groupRelevancy) {
+        this.author = author;
+        this.date = date;
+        this.desc = desc;
+        this.groupRelevancy = groupRelevancy;
+        this.id = id;
+        this.timezone = timezone;
+        this.title = title;
+    }
+
 
     public Event(String id, String title, String desc, String author, String date, String timezone, int groupRelevancy) {
         this.author = author;
@@ -124,5 +135,10 @@ public class Event implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+    public int compareTo(Event another) {
+        return this.getDate().compareTo(another.getDate());
     }
 }
