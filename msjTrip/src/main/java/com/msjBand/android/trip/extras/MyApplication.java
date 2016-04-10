@@ -1,17 +1,25 @@
-package com.msjBand.android.trip;
+package com.msjBand.android.trip.extras;
 
 import android.app.Application;
 import android.content.Context;
+import com.msjBand.android.trip.database.DBEvents;
 
 public class MyApplication extends Application {
 
     private static MyApplication sInstance;
-    public static final String EventsURL = "http://msj-band-trip.herokuapp.com/exportEvents.json";
-
+    public static final String MasterEventsURL = "http://msj-band-trip.herokuapp.com/exportEvents.json";
+    private static DBEvents mDatabase;
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+    }
+
+    public synchronized static DBEvents getWritableDatabase() {
+        if (mDatabase == null) {
+            mDatabase = new DBEvents(getAppContext());
+        }
+        return mDatabase;
     }
 
     public static MyApplication getInstance() {

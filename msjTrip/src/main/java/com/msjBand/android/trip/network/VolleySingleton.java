@@ -1,8 +1,8 @@
-package com.msjBand.android.trip;
+package com.msjBand.android.trip.network;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.msjBand.android.trip.extras.MyApplication;
 
 public class VolleySingleton {
 

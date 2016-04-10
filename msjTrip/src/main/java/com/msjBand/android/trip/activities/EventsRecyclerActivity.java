@@ -1,4 +1,4 @@
-package com.msjBand.android.trip;
+package com.msjBand.android.trip.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,15 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 
 
 import com.google.android.gms.gcm.GcmNetworkManager;
-import com.google.android.gms.gcm.PeriodicTask;
-import com.google.android.gms.gcm.Task;
-import services.UpdateEventsService;
+import com.msjBand.android.trip.fragments.EventsRecyclerFragment;
+import com.msjBand.android.trip.R;
 
 //import services.MyService;
 
-public class EventRecyclerActivity extends AppCompatActivity  {
+public class EventsRecyclerActivity extends AppCompatActivity  {
 
-    public static final String TAG = "EventRecyclerActivity";
+    public static final String TAG = "EventsRecyclerActivity";
     private static final String JOB_TAG = "MyServices";
 
     private GcmNetworkManager mGcmNetworkManager;

@@ -1,10 +1,25 @@
-package com.msjBand.android.trip;
+package com.msjBand.android.trip.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
-import java.util.Date;
+public class Event implements Parcelable {
 
-public class Event {
+    public static final Parcelable.Creator<Event> CREATOR
+            = new Parcelable.Creator<Event>() {
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
+
 
     private String id;
     private String title;
@@ -14,7 +29,36 @@ public class Event {
     private String timezone;
     private int groupRelevancy;
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeString(desc);
+        dest.writeString(author);
+
+        DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+        String dateStrng = dtf.print(date);
+        dest.writeString(dateStrng);
+        dest.writeString(timezone);
+        dest.writeInt(groupRelevancy);
+
+    }
+
+    public Event(Parcel input) {
+        id = input.readString();
+        title = input.readString();
+        desc = input.readString();
+        author = input.readString();
+        DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
+        date = dtf.parseDateTime(input.readString());
+        timezone = input.readString();
+        groupRelevancy = input.readInt();
+    }
 
     public Event(String id, String title, String desc, String author, String date, String timezone, int groupRelevancy) {
         this.author = author;

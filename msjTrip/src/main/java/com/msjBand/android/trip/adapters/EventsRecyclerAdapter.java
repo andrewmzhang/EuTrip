@@ -1,4 +1,4 @@
-package com.msjBand.android.trip;
+package com.msjBand.android.trip.adapters;
 
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.msjBand.android.trip.R;
+import com.msjBand.android.trip.pojo.Event;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -120,6 +123,26 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     public void updateItemAt(int index, Event item) {
         mEvents.updateItemAt(index, item);
     }
+
+    public void set (List<Event> events) {
+        if (events == null) {
+            return;
+        }
+        addAll(events);
+        if (events.size() < getItemCount()) {
+            ArrayList<String> Event_IDS = new ArrayList<>();
+            for(Event e: events) {
+                Event_IDS.add(e.getId());
+            }
+
+            for(int i = getItemCount() - 1; i >= 0; i--) {
+                if(!Event_IDS.contains(get(i).getId())) {
+                    removeItemAt(i);
+                }
+            }
+        }
+    }
+
 
     public void addAll(List<Event> items) {
         mEvents.beginBatchedUpdates();
