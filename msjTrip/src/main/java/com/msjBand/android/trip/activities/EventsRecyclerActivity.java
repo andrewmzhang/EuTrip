@@ -3,15 +3,18 @@ package com.msjBand.android.trip.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
 import com.msjBand.android.trip.fragments.EventsRecyclerFragment;
 import com.msjBand.android.trip.R;
+import com.msjBand.android.trip.fragments.navigationDrawer;
 import com.msjBand.android.trip.services.UpdateEventsMasterService;
 
 
@@ -20,6 +23,7 @@ public class EventsRecyclerActivity extends AppCompatActivity  {
     public static final String TAG = "EventsRecyclerActivity";
     private static final String JOB_TAG = "MyServices";
     private static int hour = 3600;
+    private Toolbar mToolbar;
 
     private GcmNetworkManager mGcmNetworkManager;
 
@@ -48,7 +52,8 @@ public class EventsRecyclerActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_recycler_list);
 
-
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
 
 
 
@@ -63,8 +68,10 @@ public class EventsRecyclerActivity extends AppCompatActivity  {
             transaction.commit();
         }
 
-
-
+    /*    navigationDrawer drawerFragment = (navigationDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp((DrawerLayout) findViewById(R.id.drawer_layout), );
+*/
     }
 
 

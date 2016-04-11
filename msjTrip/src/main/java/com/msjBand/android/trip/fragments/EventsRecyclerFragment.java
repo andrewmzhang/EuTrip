@@ -273,7 +273,7 @@ public class EventsRecyclerFragment extends Fragment implements SwipeRefreshLayo
 
         super.onCreate(savedInstanceState);
 
-        getActivity().setTitle(R.string.event_title);
+        //getActivity().setTitle(R.string.event_title);
 
 
         mEventsMasterObserver = new EventsMasterObserver();
