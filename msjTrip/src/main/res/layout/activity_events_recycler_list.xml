@@ -34,7 +34,7 @@
             android:layout_gravity="start"
             android:id="@+id/fragment_navigation_drawer"
             app:layout="@layout/fragment_navigation_drawer"
-            android:name="com.msjBand.android.trip.fragments.navigationDrawer"
+            android:name="com.msjBand.android.trip.oldfiles.fragments.navigationDrawer"
             tools:layout="@layout/fragment_navigation_drawer">
 
     </fragment>
