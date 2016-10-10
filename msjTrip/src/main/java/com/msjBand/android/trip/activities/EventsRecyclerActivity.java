@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.google.android.gms.gcm.GcmNetworkManager;
+import com.google.firebase.database.FirebaseDatabase;
 import com.msjBand.android.trip.R;
 import com.msjBand.android.trip.fragments.EventsRecyclerFragment;
 
@@ -44,6 +45,7 @@ public class EventsRecyclerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_recycler_list);
+
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);

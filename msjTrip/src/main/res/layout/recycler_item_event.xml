@@ -1,69 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingTop="10dp"
-              android:paddingBottom="10dp"
-              android:paddingStart="25dp"
-              android:paddingLeft="25dp"
-              android:gravity="left">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/event_image_view"
-            android:src="@android:drawable/sym_call_incoming"
-            />
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingRight="20dp"
-            >
+
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+>
+
+    <android.support.v7.widget.CardView
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
                 android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="25dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                    android:gravity="left|top"
-                    android:id="@+id/event_Title"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_weight="1"
-                    android:src="@drawable/plane_takeoff"
-                    android:layout_width="wrap_content"
-                    android:text="Hello World"
-                    android:textColor="@color/primary_text"
-                    android:layout_height="wrap_content"/>
 
-            <TextView
-                    android:textColor="@color/secondary_text"
-                    android:id="@+id/event_item_time_date"
+            <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:text="Broken"
-                    />
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="25dp"
+                    android:paddingLeft="25dp"
+                    android:gravity="left"
+            >
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/event_image_view"
+                        android:src="@android:drawable/sym_call_incoming"
+                />
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingRight="20dp"
+                >
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="25dp">
+
+                        <TextView
+                                android:gravity="left|top"
+                                android:id="@+id/event_Title"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:layout_weight="1"
+                                android:src="@drawable/plane_takeoff"
+                                android:layout_width="wrap_content"
+                                android:text="Title"
+                                android:textColor="@color/primary_text"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:textColor="@color/secondary_text"
+                                android:id="@+id/event_item_time_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Dateday Time:Hour"
+                        />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sadlfksl;dfkjsaldkf"
+
+
+            />
         </LinearLayout>
-
-
-
-    </LinearLayout>
-
-
-
-
-
-
-
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>
+
+
