@@ -1,43 +1,59 @@
 {
   "project_info": {
-    "project_id": "msj-band-trip",
-    "project_number": "915259352632",
-    "name": "MSJ Band Trip"
+    "project_number": "251116259171",
+    "firebase_url": "https://msj-band-trip-1362.firebaseio.com",
+    "project_id": "msj-band-trip-1362",
+    "storage_bucket": "msj-band-trip-1362.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:915259352632:android:9067eef10a33af3d",
-        "client_id": "android:com.msjBand.android.trip",
-        "client_type": 1,
+        "mobilesdk_app_id": "1:251116259171:android:9067eef10a33af3d",
         "android_client_info": {
-          "package_name": "com.msjBand.android.trip",
-          "certificate_hash": []
+          "package_name": "com.msjBand.android.trip"
         }
       },
-      "oauth_client": [],
-      "api_key": [],
+      "oauth_client": [
+        {
+          "client_id": "251116259171-iqk0v9tgkj248hrpfl56rkjk20gmpf1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.msjBand.android.trip",
+            "certificate_hash": "7A74E2CD022B6D09A85EF257A6F1B0A345A9AD34"
+          }
+        },
+        {
+          "client_id": "251116259171-5fedsmh3tsl2il7cvkg980pq5iavcnsc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "251116259171-qorstmboqv0sicg4dnklrfcjao7qubur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnXzdvhoZ53qB_ne4LvraWpSpHRCsx6C8"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1
         },
-        "cloud_messaging_service": {
-          "status": 2,
-          "apns_config": []
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "google_signin_service": {
-          "status": 1
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251116259171-5fedsmh3tsl2il7cvkg980pq5iavcnsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }

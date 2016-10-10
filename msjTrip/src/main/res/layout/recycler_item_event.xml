@@ -9,11 +9,10 @@
               android:paddingLeft="25dp"
               android:gravity="left">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/event_image_view"
-            android:adjustViewBounds="true"
             android:src="@android:drawable/sym_call_incoming"
             />
     <LinearLayout
